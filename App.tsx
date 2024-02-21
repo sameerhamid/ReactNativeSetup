@@ -3,11 +3,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 
 import {
-  Button,
   Dimensions,
   Image,
   SafeAreaView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -15,6 +13,8 @@ import {
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {IMAGES} from './src/assets/images';
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 function App(): React.JSX.Element {
   const [activeDotIndex, setActiveDotIndex] = useState(0);
@@ -119,8 +119,11 @@ function App(): React.JSX.Element {
                 height: 50,
                 borderRadius: 25,
                 backgroundColor: 'lightgray',
-              }}
-            />
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Icon name="arrow-back" size={26} color="#000" />
+            </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
             onPress={() => {
@@ -133,8 +136,11 @@ function App(): React.JSX.Element {
                 height: 50,
                 borderRadius: 25,
                 backgroundColor: 'teal',
-              }}
-            />
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Icon name="arrow-forward" size={26} color="#000" />
+            </View>
           </TouchableWithoutFeedback>
         </View>
       </View>
