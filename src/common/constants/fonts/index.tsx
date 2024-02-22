@@ -13,4 +13,4 @@ const FONTS = {
   }),
 };
 
-export default FONTS;
+export {FONTS};
