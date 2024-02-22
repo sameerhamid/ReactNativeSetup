@@ -8,3 +8,4 @@ const LightTheme = {
     tabbarInactiveColor: '#000',
   },
 };
+export default LightTheme;
