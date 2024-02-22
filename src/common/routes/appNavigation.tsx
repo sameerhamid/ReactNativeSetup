@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -6,6 +6,7 @@ import IntroScreen from '../../screens/introScreen';
 import LoginScreen from '../../screens/auth/LoginScreen';
 import {NavScreenTags} from '../constants/navScreenTags';
 import {navigationRef} from '../utils/navigatorUtils';
+import {AppContext} from '../theme/AppContext';
 
 const Stack = createStackNavigator();
 
@@ -34,9 +35,12 @@ const RooStack = (): React.ReactElement => (
   </Stack.Navigator>
 );
 
-const AppNavigation = () => {
+const AppNavigation = ({
+  //@ts-ignore
+  theme,
+}) => {
   return (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer ref={navigationRef} theme={theme}>
       <RooStack />
     </NavigationContainer>
   );
