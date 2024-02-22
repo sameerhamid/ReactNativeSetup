@@ -15,6 +15,7 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {IMAGES} from './src/assets/images';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import {FONTS} from './src/constants';
 
 function App(): React.JSX.Element {
   const [activeDotIndex, setActiveDotIndex] = useState(0);
@@ -62,13 +63,21 @@ function App(): React.JSX.Element {
           }}
         />
         <View style={{padding: 15}}>
-          <Text style={{fontSize: 18, fontWeight: '700'}}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontFamily: FONTS.MONTSERRAT_BOLD,
+            }}>
             {
               //@ts-ignore
               item.title
             }
           </Text>
-          <Text style={{fontSize: 16, fontWeight: '500'}}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: FONTS.MONTSERRAT,
+            }}>
             {
               //@ts-ignore
               item.descriptio
