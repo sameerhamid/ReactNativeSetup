@@ -14,7 +14,7 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {IMAGES} from '../../common/constants/images';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {FONTS} from '../../common/constants/fonts/index';
-import SCREENS from '..';
+
 import {NavScreenTags} from '../../common/constants/navScreenTags';
 import {navigateToAnotherStack} from '../../common/utils/navigatorUtils';
 interface Props {}
@@ -26,24 +26,23 @@ const IntroScreen = (props: Props) => {
   const data = [
     {
       id: 1,
-      title: 'Browse Product',
+      title: 'What is Quranly?',
       image: IMAGES.ONE,
       descriptio:
-        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+        'Quranly is a habit building app, designed specificially to help you to start reading the Quran everyday and connect with the words of Allah!',
     },
     {
       id: 2,
-      title: 'Play Seemlessly',
+      title: 'Verses to pages',
       image: IMAGES.TWO,
-      descriptio:
-        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+      descriptio: 'We help you to build a habit so you read more over time',
     },
     {
       id: 3,
-      title: 'Track Order',
+      title: 'Reward',
       image: IMAGES.THREE,
       descriptio:
-        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+        'Know the reward for each letter based on the Hadith of the Prophet ❤️',
     },
   ];
 
@@ -60,10 +59,12 @@ const IntroScreen = (props: Props) => {
             height: Dimensions.get('screen').width,
           }}
         />
-        <View style={{padding: 15}}>
+        <View style={{paddingHorizontal: 26, gap: 18}}>
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 20,
+              fontFamily: FONTS.MONTSERRAT_BOLD,
+              textAlign: 'center',
             }}>
             {
               //@ts-ignore
@@ -72,7 +73,9 @@ const IntroScreen = (props: Props) => {
           </Text>
           <Text
             style={{
-              fontSize: 16,
+              fontSize: 15,
+              fontFamily: FONTS.MONTSERRAT,
+              textAlign: 'center',
             }}>
             {
               //@ts-ignore
@@ -83,19 +86,99 @@ const IntroScreen = (props: Props) => {
       </View>
     );
   };
-  return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'space-betwceen'}}>
-      <View style={{alignItems: 'flex-end', padding: 15}}>
+
+  const renderSkipButton = (): React.ReactElement => (
+    <View style={{alignItems: 'flex-end', padding: 15}}>
+      <TouchableOpacity
+        onPress={() => {
+          navigateToAnotherStack(
+            NavScreenTags.AUTH_STACK,
+            NavScreenTags.LOGIN_SCREEN,
+          );
+        }}>
+        <Text style={{color: 'black'}}>Skip</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  const renderHeading = (): React.ReactElement => (
+    <View>
+      <Text
+        style={{
+          textAlign: 'center',
+          fontFamily: FONTS.MONTSERRAT_BOLD,
+          fontSize: 26,
+        }}>
+        QURANLY
+      </Text>
+    </View>
+  );
+
+  const renderPagination = (): React.ReactElement => (
+    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <Pagination
+        dotsLength={3}
+        activeDotIndex={activeDotIndex}
+        //@ts-ignore
+        carouselRef={_carouselRef}
+        dotStyle={{
+          width: 15,
+          backgroundColor: 'teal',
+        }}
+        inactiveDotStyle={{
+          width: 10,
+        }}
+      />
+      <View style={{padding: 15, flexDirection: 'row', gap: 10}}>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            //@ts-ignore
+            _carouselRef.current.snapToItem(activeDotIndex - 1);
+          }}>
+          <View
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 25,
+              backgroundColor: 'lightgray',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Icon name="arrow-back" size={26} color="#000" />
+          </View>
+        </TouchableWithoutFeedback>
         <TouchableOpacity
           onPress={() => {
-            navigateToAnotherStack(
-              NavScreenTags.AUTH_STACK,
-              NavScreenTags.LOGIN_SCREEN,
-            );
+            if (activeDotIndex === data.length - 1) {
+              navigateToAnotherStack(
+                NavScreenTags.AUTH_STACK,
+                NavScreenTags.LOGIN_SCREEN,
+              );
+            } else {
+              //@ts-ignore
+              _carouselRef.current.snapToItem(activeDotIndex + 1);
+            }
           }}>
-          <Text style={{color: 'black'}}>Skip</Text>
+          <View
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 25,
+              backgroundColor: 'teal',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Icon name="arrow-forward" size={26} color="#000" />
+          </View>
         </TouchableOpacity>
       </View>
+    </View>
+  );
+
+  return (
+    <SafeAreaView style={{flex: 1, justifyContent: 'space-betwceen'}}>
+      {renderSkipButton()}
+      {renderHeading()}
       <Carousel
         //@ts-ignore
         ref={_carouselRef}
@@ -105,57 +188,7 @@ const IntroScreen = (props: Props) => {
         itemWidth={Dimensions.get('window').width}
         onSnapToItem={index => setActiveDotIndex(index)}
       />
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Pagination
-          dotsLength={3}
-          activeDotIndex={activeDotIndex}
-          //@ts-ignore
-          carouselRef={_carouselRef}
-          dotStyle={{
-            width: 15,
-            backgroundColor: 'teal',
-          }}
-          inactiveDotStyle={{
-            width: 10,
-          }}
-        />
-        <View style={{padding: 15, flexDirection: 'row', gap: 10}}>
-          <TouchableWithoutFeedback
-            onPress={() => {
-              //@ts-ignore
-              _carouselRef.current.snapToItem(activeDotIndex - 1);
-            }}>
-            <View
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                backgroundColor: 'lightgray',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Icon name="arrow-back" size={26} color="#000" />
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback
-            onPress={() => {
-              //@ts-ignore
-              _carouselRef.current.snapToItem(activeDotIndex + 1);
-            }}>
-            <View
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                backgroundColor: 'teal',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Icon name="arrow-forward" size={26} color="#000" />
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-      </View>
+      {renderPagination()}
     </SafeAreaView>
   );
 };
