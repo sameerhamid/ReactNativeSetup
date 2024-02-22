@@ -64,7 +64,6 @@ const IntroScreen = (props: Props) => {
           <Text
             style={{
               fontSize: 18,
-              fontFamily: FONTS.MONTSERRAT_BOLD,
             }}>
             {
               //@ts-ignore
@@ -74,7 +73,6 @@ const IntroScreen = (props: Props) => {
           <Text
             style={{
               fontSize: 16,
-              fontFamily: FONTS.MONTSERRAT,
             }}>
             {
               //@ts-ignore
