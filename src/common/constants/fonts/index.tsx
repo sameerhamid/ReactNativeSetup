@@ -8,7 +8,7 @@ const FONTS = {
     },
     android: {
       MONTSERRAT: 'MontserratRegular',
-      MONTSERRAT_BOLD: 'Montserrat-Bold',
+      MONTSERRAT_BOLD: 'MontserratBold',
     },
   }),
 };
