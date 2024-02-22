@@ -1,118 +1,151 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, {useEffect, useRef, useState} from 'react';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import SplashScreen from 'react-native-splash-screen';
+
 import {
+  Dimensions,
+  Image,
   SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
-  useColorScheme,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {IMAGES} from './src/assets/images';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import Icon from 'react-native-vector-icons/Ionicons';
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [activeDotIndex, setActiveDotIndex] = useState(0);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const _carouselRef = useRef();
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+  const data = [
+    {
+      id: 1,
+      title: 'Browse Product',
+      image: IMAGES.ONE,
+      descriptio:
+        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    },
+    {
+      id: 2,
+      title: 'Play Seemlessly',
+      image: IMAGES.TWO,
+      descriptio:
+        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    },
+    {
+      id: 3,
+      title: 'Track Order',
+      image: IMAGES.THREE,
+      descriptio:
+        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    },
+  ];
+
+  const _renderItem = ({item, index}: {item: {}; index: number}) => {
+    return (
+      <View>
+        <Image
+          source={
+            //@ts-ignore
+            item.image
+          }
+          style={{
+            width: Dimensions.get('screen').width,
+            height: Dimensions.get('screen').width,
+          }}
+        />
+        <View style={{padding: 15}}>
+          <Text style={{fontSize: 18, fontWeight: '700'}}>
+            {
+              //@ts-ignore
+              item.title
+            }
+          </Text>
+          <Text style={{fontSize: 16, fontWeight: '500'}}>
+            {
+              //@ts-ignore
+              item.descriptio
+            }
+          </Text>
+        </View>
+      </View>
+    );
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <SafeAreaView style={{flex: 1, justifyContent: 'space-betwceen'}}>
+      <View style={{alignItems: 'flex-end', padding: 15}}>
+        <TouchableOpacity>
+          <Text style={{color: 'black'}}>Skip</Text>
+        </TouchableOpacity>
+      </View>
+      <Carousel
+        ref={_carouselRef}
+        data={data}
+        renderItem={_renderItem}
+        sliderWidth={Dimensions.get('window').width}
+        itemWidth={Dimensions.get('window').width}
+        onSnapToItem={index => setActiveDotIndex(index)}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Pagination
+          dotsLength={3}
+          activeDotIndex={activeDotIndex}
+          carouselRef={_carouselRef}
+          dotStyle={{
+            width: 15,
+            backgroundColor: 'teal',
+          }}
+          inactiveDotStyle={{
+            width: 10,
+          }}
+        />
+        <View style={{padding: 15, flexDirection: 'row', gap: 10}}>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              //@ts-ignore
+              _carouselRef.current.snapToItem(activeDotIndex - 1);
+            }}>
+            <View
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 25,
+                backgroundColor: 'lightgray',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Icon name="arrow-back" size={26} color="#000" />
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              //@ts-ignore
+              _carouselRef.current.snapToItem(activeDotIndex + 1);
+            }}>
+            <View
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 25,
+                backgroundColor: 'teal',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Icon name="arrow-forward" size={26} color="#000" />
+            </View>
+          </TouchableWithoutFeedback>
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
