@@ -7,6 +7,9 @@ import LoginScreen from '../../screens/auth/LoginScreen';
 import {NavScreenTags} from '../constants/navScreenTags';
 import {navigationRef} from '../utils/navigatorUtils';
 import {AppContext} from '../theme/AppContext';
+import DarkTheme from '../theme/darkTheme';
+import LightTheme from '../theme/LightTheme';
+import SignupScreen from '../../screens/auth/signupScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +18,11 @@ const AuthStack = (): React.ReactElement => (
     <Stack.Screen
       name={NavScreenTags.LOGIN_SCREEN}
       component={LoginScreen}
+      options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name={NavScreenTags.SING_UP_SCREEN}
+      component={SignupScreen}
       options={{headerShown: false}}
     />
   </Stack.Navigator>
@@ -35,12 +43,9 @@ const RooStack = (): React.ReactElement => (
   </Stack.Navigator>
 );
 
-const AppNavigation = ({
-  //@ts-ignore
-  theme,
-}) => {
+const AppNavigation = () => {
   return (
-    <NavigationContainer ref={navigationRef} theme={theme}>
+    <NavigationContainer ref={navigationRef}>
       <RooStack />
     </NavigationContainer>
   );
