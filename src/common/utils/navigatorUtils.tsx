@@ -35,3 +35,10 @@ export const navigateToAnotherStack = (
     params,
   });
 };
+
+/**
+ * go back to previous screen
+ */
+export const goBack = (): void => {
+  navigationRef?.current?.goBack();
+};
