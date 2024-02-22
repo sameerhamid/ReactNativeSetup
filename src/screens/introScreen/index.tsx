@@ -11,15 +11,15 @@ import {
   View,
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {IMAGES} from '../../common/assets/images/index';
+import {IMAGES} from '../../common/constants/images';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {FONTS} from '../../common/constants/fonts/index';
 import SCREENS from '..';
 import {NavScreenTags} from '../../common/constants/navScreenTags';
+import {navigateToAnotherStack} from '../../common/utils/navigatorUtils';
 interface Props {}
 
 const IntroScreen = (props: Props) => {
-  const {navigation} = props;
   const [activeDotIndex, setActiveDotIndex] = useState(0);
 
   const _carouselRef = useRef();
@@ -88,7 +88,10 @@ const IntroScreen = (props: Props) => {
       <View style={{alignItems: 'flex-end', padding: 15}}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate(NavScreenTags.AUTH_STACK);
+            navigateToAnotherStack(
+              NavScreenTags.AUTH_STACK,
+              NavScreenTags.LOGIN_SCREEN,
+            );
           }}>
           <Text style={{color: 'black'}}>Skip</Text>
         </TouchableOpacity>
