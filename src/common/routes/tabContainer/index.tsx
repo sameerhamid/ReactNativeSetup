@@ -1,15 +1,41 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import LoginScreen from '../../../screens/auth/LoginScreen';
 import {NavScreenTags} from '../../constants/navScreenTags';
-import HomeScreen from '../../../screens/tabScreens/HomeScreen';
-import {Image} from 'react-native';
+
+import {Image, Text, View} from 'react-native';
 import {IMAGES} from '../../constants/images';
-import WishlistScreen from '../../../screens/tabScreens/WishlistScreen';
-import OrderScreen from '../../../screens/tabScreens/OrderScreen';
-import ProfileScreen from '../../../screens/tabScreens/ProfileScreen';
-import {COLORS} from '../../constants/colors';
+
 import {useTheme} from '@react-navigation/native';
+import HomeScreen from '../../../screens/Home/HomeScreen';
+import WishlistScreen from '../../../screens/Home/WishlistScreen';
+import OrderScreen from '../../../screens/Home/OrderScreen';
+import ProfileScreen from '../../../screens/Home/ProfileScreen';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
 const Tab = createBottomTabNavigator();
+const Drawer = createBottomTabNavigator();
+
+// Drawer navigation
+
+const DrawerContainer = () => {
+  return (
+    <Drawer.Navigator
+      initialRouteName={NavScreenTags.PROFILE_TAB}
+      drawerContent={() => (
+        <View style={{marginTop: 30}}>
+          <Text>sameer</Text>
+        </View>
+      )}>
+      <Drawer.Screen
+        name={NavScreenTags.PROFILE_TAB}
+        component={ProfileScreen}
+      />
+    </Drawer.Navigator>
+  );
+};
+
+// Tabs navigation
+
 const TabContainer = (): React.ReactElement => {
   const {colors} = useTheme();
   return (
@@ -102,8 +128,8 @@ const TabContainer = (): React.ReactElement => {
       />
 
       <Tab.Screen
-        name={NavScreenTags.PROFILE_TAB}
-        component={ProfileScreen}
+        name={NavScreenTags.DRAWER_NAV}
+        component={DrawerContainer}
         options={{
           title: 'Profile',
 

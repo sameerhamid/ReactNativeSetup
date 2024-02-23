@@ -14,5 +14,8 @@ export const NavScreenTags = {
   LOGIN_SCREEN: 'LoginScreen',
   SING_UP_SCREEN: 'SignupScreen',
 
-  // Add for more screens
+  // Drawer navigation
+
+  DRAWER_NAV: 'DrawerNavigator',
+  ABOUT_DRAWER: 'About',
 };
