@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -8,11 +8,11 @@ import {NavScreenTags} from '../constants/navScreenTags';
 import {navigationRef} from '../utils/navigatorUtils';
 import {AppContext} from '../theme/AppContext';
 import DarkTheme from '../theme/darkTheme';
-import LightTheme from '../theme/LightTheme';
+
 import SignupScreen from '../../screens/auth/signupScreen';
-
+import TabContainer from './tabContainer';
+import LightTheme from '../theme/lightTheme';
 const Stack = createStackNavigator();
-
 const AuthStack = (): React.ReactElement => (
   <Stack.Navigator>
     <Stack.Screen
@@ -35,18 +35,36 @@ const RooStack = (): React.ReactElement => (
       component={IntroScreen}
       options={{headerShown: false}}
     />
+
     <Stack.Screen
       name={NavScreenTags.AUTH_STACK}
       component={AuthStack}
+      options={{headerShown: false}}
+    />
+
+    <Stack.Screen
+      name={NavScreenTags.BOTTOM_TAB_NAV}
+      component={TabContainer}
       options={{headerShown: false}}
     />
   </Stack.Navigator>
 );
 
 const AppNavigation = () => {
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
+
+  const appContext = useMemo(() => {
+    return {isDarkTheme, setIsDarkTheme};
+  }, [isDarkTheme, setIsDarkTheme]);
+
   return (
-    <NavigationContainer ref={navigationRef}>
-      <RooStack />
+    <NavigationContainer
+      ref={navigationRef}
+      //@ts-ignore
+      theme={isDarkTheme ? DarkTheme : LightTheme}>
+      <AppContext.Provider value={appContext}>
+        <RooStack />
+      </AppContext.Provider>
     </NavigationContainer>
   );
 };

@@ -3,7 +3,7 @@ const COLORS = {
   WHITE: '#FFF',
   BLACK: '#000',
   PLACEHOLDER_COLOR: '#8B8B8B',
-  GRAY_LIGHT: 'lightgray',
+  GRAY_LIGHT: '#6b7070',
   TEAL: 'teal',
 };
 
