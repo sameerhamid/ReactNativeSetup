@@ -206,7 +206,7 @@ const LoginScreen = () => {
         <Text style={{fontFamily: FONTS.MONTSERRAT, color: colors.text}}>
           Not a member?
         </Text>
-        <TouchableWithoutFeedback
+        <TouchableOpacity
           onPress={() => navigate(NavScreenTags.SING_UP_SCREEN)}>
           <Text
             style={{
@@ -216,7 +216,7 @@ const LoginScreen = () => {
             }}>
             Register now
           </Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
