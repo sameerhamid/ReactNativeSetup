@@ -110,6 +110,8 @@ const LoginScreen = () => {
     </>
   );
 
+  console.log(socialMedia);
+
   const renderSocials = (): React.ReactElement => (
     <View
       style={{
@@ -117,7 +119,7 @@ const LoginScreen = () => {
         justifyContent: 'space-around',
         marginVertical: 50,
       }}>
-      {socialMedia.map(item => {
+      {socialMedia.map((item, index) => {
         return (
           <TouchableOpacity
             key={item.id}
@@ -126,13 +128,17 @@ const LoginScreen = () => {
               width: 70,
               borderWidth: 3,
               borderRadius: 10,
-              borderColor: COLORS.WHITE,
+              borderColor: isDarkTheme ? COLORS.WHITE : COLORS.BLACK,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
             <Image
               source={item.image}
-              style={{height: 34, width: 40, objectFit: 'contain'}}
+              style={{
+                height: 34,
+                width: 40,
+                objectFit: 'contain',
+              }}
             />
           </TouchableOpacity>
         );
@@ -158,7 +164,7 @@ const LoginScreen = () => {
       </Text>
       <TouchableWithoutFeedback
         onPress={() => {
-          navigate(NavScreenTags.SING_UP_SCREEN);
+          navigate(NavScreenTags.BOTTOM_TAB_NAV);
         }}>
         <View
           style={{
@@ -206,7 +212,7 @@ const LoginScreen = () => {
         <Text style={{fontFamily: FONTS.MONTSERRAT, color: colors.text}}>
           Not a member?
         </Text>
-        <TouchableWithoutFeedback
+        <TouchableOpacity
           onPress={() => navigate(NavScreenTags.SING_UP_SCREEN)}>
           <Text
             style={{
@@ -216,7 +222,7 @@ const LoginScreen = () => {
             }}>
             Register now
           </Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

@@ -7,4 +7,8 @@ export const IMAGES = {
   APPLE: require('../assets/images/apple.png'),
   GOOGLE: require('../assets/images/google.png'),
   FACEBOOK: require('../assets/images/facebook.png'),
+  USER: require('../assets/images/user.png'),
+  ORDER: require('../assets/images/orders.png'),
+  WISHLIST: require('../assets/images/wishlist.png'),
+  HOME: require('../assets/images/home.png'),
 };
