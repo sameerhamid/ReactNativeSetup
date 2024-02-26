@@ -19,6 +19,7 @@ import {NavScreenTags} from '../../common/constants/navScreenTags';
 import {navigateToAnotherStack} from '../../common/utils/navigatorUtils';
 import Colors from '../../common/styles/colors';
 import {scaleSize} from '../../common/utils/scaleSheetUtils';
+import PageSkelton from '../../common/components/pageSkelton';
 interface Props {}
 
 const IntroScreen = (props: Props) => {
@@ -90,7 +91,7 @@ const IntroScreen = (props: Props) => {
   };
 
   const renderSkipButton = (): React.ReactElement => (
-    <View style={{alignItems: 'flex-end', padding: 15}}>
+    <View style={{alignItems: 'flex-end'}}>
       <TouchableOpacity
         onPress={() => {
           navigateToAnotherStack(
@@ -109,7 +110,7 @@ const IntroScreen = (props: Props) => {
         style={{
           textAlign: 'center',
           fontFamily: FONTS.MONTSERRAT_BOLD,
-          fontSize: 26,
+          fontSize: scaleSize(22),
         }}>
         QURANLY
       </Text>
@@ -139,8 +140,8 @@ const IntroScreen = (props: Props) => {
           }}>
           <View
             style={{
-              width: scaleSize(80),
-              height: scaleSize(80),
+              width: scaleSize(40),
+              height: scaleSize(40),
               borderRadius: scaleSize(40),
               backgroundColor: Colors.grey100,
               justifyContent: 'center',
@@ -164,8 +165,8 @@ const IntroScreen = (props: Props) => {
           }}>
           <View
             style={{
-              width: scaleSize(80),
-              height: scaleSize(80),
+              width: scaleSize(40),
+              height: scaleSize(40),
               borderRadius: scaleSize(40),
               backgroundColor: Colors.danger100,
               justifyContent: 'center',
@@ -180,7 +181,7 @@ const IntroScreen = (props: Props) => {
   );
 
   return (
-    <View style={{flex: 1, justifyContent: 'space-betwceen'}}>
+    <PageSkelton isSafeAreaView isPaddingFromBottom>
       {renderSkipButton()}
       {renderHeading()}
       <Carousel
@@ -193,7 +194,7 @@ const IntroScreen = (props: Props) => {
         onSnapToItem={index => setActiveDotIndex(index)}
       />
       {renderPagination()}
-    </View>
+    </PageSkelton>
   );
 };
 
