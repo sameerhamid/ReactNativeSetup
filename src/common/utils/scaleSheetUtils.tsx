@@ -3,7 +3,6 @@ import {screenHeight, screenWidth} from '../constants/dimensions';
 import {isIOS, isTablet} from '../constants/platformInfro';
 
 const baseWidth = isTablet ? 662 : 375;
-
 const baseHeight = isTablet ? 970 : 667;
 
 /**
@@ -11,10 +10,9 @@ const baseHeight = isTablet ? 970 : 667;
  * @param size
  * @returns
  */
-
 export const scaleSize = (size: number): number => {
-  const scaleWidth = (screenWidth / baseHeight) * size;
-  return scaleWidth < 1 ? scaleWidth : Math.round(scaleWidth);
+  const scaledWidth = (screenWidth / baseWidth) * size;
+  return scaledWidth < 1 ? scaledWidth : Math.round(scaledWidth);
 };
 
 /**
@@ -22,10 +20,8 @@ export const scaleSize = (size: number): number => {
  * @param size
  * @returns
  */
-
-export const scaleSizeWith = (size: number): number => {
-  return Math.round(screenWidth / baseWidth) * size;
-};
+export const scaleSizeWidth = (size: number): number =>
+  Math.round((screenWidth / baseWidth) * size);
 
 /**
  * get screen height
@@ -40,8 +36,7 @@ export const scaleSizeHeight = (size: number): number =>
  * @param size
  * @returns
  */
-
-export const scaleFontSize = (size: number) => {
+export const scaleFontSize = (size: number): number => {
   const scale = screenWidth / baseWidth;
   const newSize = size * scale;
   if (isIOS) {

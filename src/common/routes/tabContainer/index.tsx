@@ -97,8 +97,8 @@ const TabContainer = (): React.ReactElement => {
             <Image
               source={IMAGES.HOME}
               style={{
-                height: scaleSize(40),
-                width: scaleSize(40),
+                height: scaleSize(26),
+                width: scaleSize(26),
                 objectFit: 'contain',
                 tintColor: focused
                   ? //@ts-ignore
@@ -124,8 +124,8 @@ const TabContainer = (): React.ReactElement => {
             <Image
               source={IMAGES.WISHLIST}
               style={{
-                height: 25,
-                width: 25,
+                height: scaleSize(26),
+                width: scaleSize(26),
                 objectFit: 'contain',
                 tintColor: focused
                   ? //@ts-ignore
@@ -151,8 +151,8 @@ const TabContainer = (): React.ReactElement => {
             <Image
               source={IMAGES.ORDER}
               style={{
-                height: 25,
-                width: 25,
+                height: scaleSize(26),
+                width: scaleSize(26),
                 objectFit: 'contain',
                 tintColor: focused
                   ? //@ts-ignore
@@ -179,8 +179,9 @@ const TabContainer = (): React.ReactElement => {
             <Image
               source={IMAGES.USER}
               style={{
-                height: 25,
-                width: 25,
+                height: scaleSize(26),
+                width: scaleSize(26),
+
                 objectFit: 'contain',
                 tintColor: focused
                   ? //@ts-ignore
