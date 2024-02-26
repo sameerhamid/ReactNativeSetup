@@ -17,6 +17,7 @@ import {isIOS} from '../../constants/platformInfro';
 import {scaleSize} from '../../utils/scaleSheetUtils';
 import stylesObj from './styles';
 import React from 'react';
+import Spacer from '../utility/spacer';
 
 interface Props {
   titlle?: string;
@@ -126,8 +127,9 @@ const CustomHeader = (props: typeof defaultProps): React.ReactElement => {
   return (
     <>
       {!isIOS && (showSpaceFromTop || defaultProps.showSpaceFromTop) && (
-        <View style={{height: scaleSize(15)}} />
+        <Spacer height={scaleSize(15)} />
       )}
+
       <View style={[styles.container, props?.containerStyle || {}]}>
         {/* left side container */}
         {leftContainer()}

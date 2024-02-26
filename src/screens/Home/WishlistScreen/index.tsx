@@ -2,12 +2,18 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import CustomHeader from '../../../common/components/customHeader';
 import {IMAGES} from '../../../common/constants/images';
+import PageSkelton from '../../../common/components/pageSkelton';
+import {goBack} from '../../../common/utils/navigatorUtils';
 
 const WishlistScreen = () => {
   return (
-    <View>
-      <CustomHeader leftAccessories={IMAGES.BACK} titlle="Wishlist" />
-    </View>
+    <PageSkelton isSafeAreaView>
+      <CustomHeader
+        leftAccessories={IMAGES.BACK}
+        titlle="Wishlist"
+        leftAccessoriesPress={goBack}
+      />
+    </PageSkelton>
   );
 };
 
