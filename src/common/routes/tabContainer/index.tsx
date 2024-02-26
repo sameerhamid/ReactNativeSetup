@@ -10,25 +10,66 @@ import HomeScreen from '../../../screens/Home/HomeScreen';
 import WishlistScreen from '../../../screens/Home/WishlistScreen';
 import OrderScreen from '../../../screens/Home/OrderScreen';
 import ProfileScreen from '../../../screens/Home/ProfileScreen';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  DrawerContentScrollView,
+  DrawerItem,
+  createDrawerNavigator,
+} from '@react-navigation/drawer';
+import {navigate} from '../../utils/navigatorUtils';
+import AboutScreen from '../../../screens/Home/AboutScreen';
+import {COLORS} from '../../constants/colors';
 
 const Tab = createBottomTabNavigator();
-const Drawer = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 // Drawer navigation
 
 const DrawerContainer = () => {
+  const {colors} = useTheme();
   return (
     <Drawer.Navigator
       initialRouteName={NavScreenTags.PROFILE_TAB}
-      drawerContent={() => (
-        <View style={{marginTop: 30}}>
-          <Text>sameer</Text>
-        </View>
-      )}>
+      drawerContent={props => {
+        const {state} = props;
+        const {routeNames, index} = state;
+        const focused = routeNames[index];
+        return (
+          <DrawerContentScrollView
+            {...props}
+            //@ts-ignore
+            style={{backgroundColor: colors.tabbarBackground, paddingTop: 22}}>
+            <Text style={{textAlign: 'center'}}>Code with sam</Text>
+
+            <DrawerItem
+              label={'Profile'}
+              onPress={() => navigate(NavScreenTags.PROFILE_TAB)}
+              focused={focused === NavScreenTags.PROFILE_TAB}
+              activeBackgroundColor={COLORS.TEAL}
+              inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+              activeTintColor={COLORS.WHITE}
+              inactiveTintColor={COLORS.BLACK}
+            />
+
+            <DrawerItem
+              label={'About Us'}
+              onPress={() => navigate(NavScreenTags.ABOUT_DRAWER)}
+              focused={focused === NavScreenTags.ABOUT_DRAWER}
+              activeBackgroundColor={COLORS.TEAL}
+              inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+              activeTintColor={COLORS.WHITE}
+              inactiveTintColor={COLORS.BLACK}
+            />
+          </DrawerContentScrollView>
+        );
+      }}>
       <Drawer.Screen
         name={NavScreenTags.PROFILE_TAB}
         component={ProfileScreen}
+      />
+
+      <Drawer.Screen
+        name={NavScreenTags.ABOUT_DRAWER}
+        component={AboutScreen}
       />
     </Drawer.Navigator>
   );
