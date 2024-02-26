@@ -17,6 +17,7 @@ import {AppContext} from '../../../common/themes/AppContext';
 import {useTheme} from '@react-navigation/native';
 import {navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
+import PageSkelton from '../../../common/components/pageSkelton';
 
 const LoginScreen = () => {
   //@ts-ignore
@@ -146,7 +147,7 @@ const LoginScreen = () => {
   );
 
   return (
-    <SafeAreaView style={{marginHorizontal: 30}}>
+    <PageSkelton isSafeAreaView isPaddingFromBottom>
       {renderSwitch()}
 
       {renderText()}
@@ -223,7 +224,7 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </PageSkelton>
   );
 };
 

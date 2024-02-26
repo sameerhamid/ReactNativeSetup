@@ -12,6 +12,7 @@ import CustomForm from '../../../common/components/customForm';
 import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
 import Colors from '../../../common/styles/colors';
 import {useTheme} from '@react-navigation/native';
+import PageSkelton from '../../../common/components/pageSkelton';
 
 const SignupScreen = () => {
   const {colors} = useTheme();
@@ -103,7 +104,7 @@ const SignupScreen = () => {
     <CustomForm formFieldsData={formData} />
   );
   return (
-    <SafeAreaView style={{marginHorizontal: 24}}>
+    <PageSkelton isSafeAreaView isPaddingFromBottom>
       {renderText()}
 
       {renderForm()}
@@ -123,7 +124,7 @@ const SignupScreen = () => {
           </Text>
         </TouchableWithoutFeedback>
       </View>
-    </SafeAreaView>
+    </PageSkelton>
   );
 };
 

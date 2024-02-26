@@ -47,16 +47,20 @@ const HomeScreen = () => {
         leftAccessoriesPress={goBack}
       />
       {prayerTiming.length &&
-        prayerTiming?.map(item => (
-          <>
+        prayerTiming?.map((item, index) => (
+          <View key={index}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <CustomText text={item?.name} />
+              <View>
+                <CustomText text={item?.name} />
+              </View>
 
-              <CustomText text={item?.time} />
+              <View>
+                <CustomText text={item?.time} />
+              </View>
             </View>
             <Spacer height={scaleSize(20)} />
-          </>
+          </View>
         ))}
     </PageSkelton>
   );
