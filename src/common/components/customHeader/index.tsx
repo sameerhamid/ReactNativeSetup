@@ -130,9 +130,6 @@ const CustomHeader = (props: typeof defaultProps): React.ReactElement => {
         <Spacer height={scaleSize(15)} />
       )}
 
-      {isIOS && (showSpaceFromTop || defaultProps.showSpaceFromTop) && (
-        <Spacer height={scaleSize(50)} />
-      )}
       <View style={[styles.container, props?.containerStyle || {}]}>
         {/* left side container */}
         {leftContainer()}
