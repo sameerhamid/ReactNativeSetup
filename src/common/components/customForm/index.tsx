@@ -1,10 +1,11 @@
 import {View, Text, Alert, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {FONTS} from '../../../common/constants/fonts';
-import {COLORS} from '../../../common/constants/colors';
+
 import Foect from 'foect';
 import styles from './stylex';
 import {FlatList, TextInput} from 'react-native-gesture-handler';
+import Colors from '../../styles/colors';
 
 const CustomForm = (formFieldsData?: []): React.ReactElement => {
   return (
@@ -38,17 +39,17 @@ const CustomForm = (formFieldsData?: []): React.ReactElement => {
                               placeholderTextColor={
                                 item.placeholderTextColor
                                   ? item.placeholderTextColor
-                                  : COLORS.PLACEHOLDER_COLOR
+                                  : Colors.text
                               }
                               cursorColor={
                                 item.cursorColor
                                   ? item.cursorColor
-                                  : COLORS.TEAL
+                                  : Colors.text
                               }
                               selectionColor={
                                 item.selectionColor
                                   ? item.selectionColor
-                                  : COLORS.TEAL
+                                  : Colors.text
                               }
                               onBlur={control.markAsTouched}
                               onChangeText={text => control.onChange(text)}
@@ -94,9 +95,9 @@ const CustomForm = (formFieldsData?: []): React.ReactElement => {
                             <TextInput
                               style={styles.textInp}
                               placeholder="Password"
-                              placeholderTextColor={COLORS.PLACEHOLDER_COLOR}
-                              cursorColor={COLORS.TEAL}
-                              selectionColor={COLORS.TEAL}
+                              placeholderTextColor={Colors.text}
+                              cursorColor={Colors.text}
+                              selectionColor={Colors.text}
                               onBlur={control.markAsTouched}
                               onChangeText={text => control.onChange(text)}
                               value={control.value}
@@ -142,9 +143,9 @@ const CustomForm = (formFieldsData?: []): React.ReactElement => {
                             <TextInput
                               style={styles.textInp}
                               placeholder="Confirm Password"
-                              placeholderTextColor={COLORS.PLACEHOLDER_COLOR}
-                              cursorColor={COLORS.TEAL}
-                              selectionColor={COLORS.TEAL}
+                              placeholderTextColor={Colors.text}
+                              cursorColor={Colors.text}
+                              selectionColor={Colors.text}
                               onBlur={control.markAsTouched}
                               onChangeText={text => control.onChange(text)}
                               value={control.value}
@@ -186,9 +187,9 @@ const CustomForm = (formFieldsData?: []): React.ReactElement => {
                             <TextInput
                               style={styles.textInp}
                               placeholder="Mobile"
-                              placeholderTextColor={COLORS.PLACEHOLDER_COLOR}
-                              cursorColor={COLORS.TEAL}
-                              selectionColor={COLORS.TEAL}
+                              placeholderTextColor={Colors.text}
+                              cursorColor={Colors.text}
+                              selectionColor={Colors.text}
                               onBlur={control.markAsTouched}
                               onChangeText={text => control.onChange(text)}
                               value={control.value}
@@ -221,17 +222,17 @@ const CustomForm = (formFieldsData?: []): React.ReactElement => {
                               placeholderTextColor={
                                 item.placeholderTextColor
                                   ? item.placeholderTextColor
-                                  : COLORS.PLACEHOLDER_COLOR
+                                  : Colors.text
                               }
                               cursorColor={
                                 item.cursorColor
                                   ? item.cursorColor
-                                  : COLORS.TEAL
+                                  : Colors.text
                               }
                               selectionColor={
                                 item.selectionColor
                                   ? item.selectionColor
-                                  : COLORS.TEAL
+                                  : Colors.text
                               }
                               onBlur={control.markAsTouched}
                               onChangeText={text => control.onChange(text)}
@@ -283,7 +284,7 @@ const CustomForm = (formFieldsData?: []): React.ReactElement => {
                   <View
                     style={{
                       height: 50,
-                      backgroundColor: COLORS.TEAL,
+                      backgroundColor: Colors.danger100,
                       marginTop: 20,
                       borderRadius: 10,
                       justifyContent: 'center',
@@ -292,7 +293,7 @@ const CustomForm = (formFieldsData?: []): React.ReactElement => {
                     <Text
                       style={{
                         fontFamily: FONTS.MONTSERRAT_BOLD,
-                        color: COLORS.WHITE,
+                        color: Colors.text,
                         fontSize: 16,
                       }}>
                       Sign Up

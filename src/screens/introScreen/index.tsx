@@ -17,6 +17,8 @@ import {FONTS} from '../../common/constants/fonts/index';
 
 import {NavScreenTags} from '../../common/constants/navScreenTags';
 import {navigateToAnotherStack} from '../../common/utils/navigatorUtils';
+import Colors from '../../common/styles/colors';
+import {scaleSize} from '../../common/utils/scaleSheetUtils';
 interface Props {}
 
 const IntroScreen = (props: Props) => {
@@ -123,30 +125,31 @@ const IntroScreen = (props: Props) => {
         carouselRef={_carouselRef}
         dotStyle={{
           width: 15,
-          backgroundColor: 'teal',
+          backgroundColor: Colors.danger100,
         }}
         inactiveDotStyle={{
           width: 10,
         }}
       />
       <View style={{padding: 15, flexDirection: 'row', gap: 10}}>
-        <TouchableWithoutFeedback
+        <TouchableOpacity
           onPress={() => {
             //@ts-ignore
             _carouselRef.current.snapToItem(activeDotIndex - 1);
           }}>
           <View
             style={{
-              width: 50,
-              height: 50,
-              borderRadius: 25,
-              backgroundColor: 'lightgray',
+              width: scaleSize(80),
+              height: scaleSize(80),
+              borderRadius: scaleSize(40),
+              backgroundColor: Colors.grey100,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Icon name="arrow-back" size={26} color="#000" />
+            {/* <Icon name="arrow-back" size={26} color="#000" /> */}
+            <Image source={IMAGES.BACK} />
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             if (activeDotIndex === data.length - 1) {
@@ -161,14 +164,15 @@ const IntroScreen = (props: Props) => {
           }}>
           <View
             style={{
-              width: 50,
-              height: 50,
-              borderRadius: 25,
-              backgroundColor: 'teal',
+              width: scaleSize(80),
+              height: scaleSize(80),
+              borderRadius: scaleSize(40),
+              backgroundColor: Colors.danger100,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Icon name="arrow-forward" size={26} color="#000" />
+            {/* <Icon name="arrow-forward" size={26} color="#000" /> */}
+            <Image source={IMAGES.FORWARD} />
           </View>
         </TouchableOpacity>
       </View>
@@ -176,7 +180,7 @@ const IntroScreen = (props: Props) => {
   );
 
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'space-betwceen'}}>
+    <View style={{flex: 1, justifyContent: 'space-betwceen'}}>
       {renderSkipButton()}
       {renderHeading()}
       <Carousel
@@ -189,7 +193,7 @@ const IntroScreen = (props: Props) => {
         onSnapToItem={index => setActiveDotIndex(index)}
       />
       {renderPagination()}
-    </SafeAreaView>
+    </View>
   );
 };
 
