@@ -76,7 +76,7 @@ const SignupScreen = () => {
     <View style={{marginBottom: scaleSize(30)}}>
       <Text
         style={{
-          marginTop: scaleSize(60),
+          marginTop: scaleSize(40),
           textAlign: 'center',
           fontFamily: FONTS.MONTSERRAT_BOLD,
           fontSize: scaleFontSize(28),
@@ -88,9 +88,9 @@ const SignupScreen = () => {
         style={{
           textAlign: 'center',
           fontFamily: FONTS.MONTSERRAT,
-          fontSize: scaleFontSize(22),
-          marginTop: scaleSize(22),
-          marginHorizontal: scaleSize(30),
+          fontSize: scaleFontSize(20),
+          marginTop: scaleSize(20),
+          marginHorizontal: scaleSize(20),
           color: colors.text,
         }}>
         Welcome to the simplified version of React Native
@@ -103,7 +103,7 @@ const SignupScreen = () => {
     <CustomForm formFieldsData={formData} />
   );
   return (
-    <SafeAreaView style={{marginHorizontal: 30}}>
+    <SafeAreaView style={{marginHorizontal: 24}}>
       {renderText()}
 
       {renderForm()}

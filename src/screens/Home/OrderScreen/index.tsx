@@ -1,10 +1,12 @@
 import {View, Text} from 'react-native';
 import React from 'react';
+import CustomHeader from '../../../common/components/customHeader';
+import {IMAGES} from '../../../common/constants/images';
 
 const OrderScreen = () => {
   return (
     <View>
-      <Text>OrderScreen</Text>
+      <CustomHeader leftAccessories={IMAGES.BACK} titlle="Order" />
     </View>
   );
 };
