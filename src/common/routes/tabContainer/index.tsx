@@ -17,7 +17,8 @@ import {
 } from '@react-navigation/drawer';
 import {navigate} from '../../utils/navigatorUtils';
 import AboutScreen from '../../../screens/Home/AboutScreen';
-import {COLORS} from '../../constants/colors';
+import Colors from '../../styles/colors';
+import {scaleSize} from '../../utils/scaleSheetUtils';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -37,27 +38,27 @@ const DrawerContainer = () => {
           <DrawerContentScrollView
             {...props}
             //@ts-ignore
-            style={{backgroundColor: colors.tabbarBackground, paddingTop: 22}}>
+            style={{backgroundColor: colors.background, paddingTop: 22}}>
             <Text style={{textAlign: 'center'}}>Code with sam</Text>
 
             <DrawerItem
               label={'Profile'}
               onPress={() => navigate(NavScreenTags.PROFILE_TAB)}
               focused={focused === NavScreenTags.PROFILE_TAB}
-              activeBackgroundColor={COLORS.TEAL}
-              inactiveBackgroundColor={COLORS.GRAY_LIGHT}
-              activeTintColor={COLORS.WHITE}
-              inactiveTintColor={COLORS.BLACK}
+              activeBackgroundColor={Colors.danger100}
+              inactiveBackgroundColor={Colors.grey100}
+              activeTintColor={Colors.text}
+              inactiveTintColor={Colors.text}
             />
 
             <DrawerItem
               label={'About Us'}
               onPress={() => navigate(NavScreenTags.ABOUT_DRAWER)}
               focused={focused === NavScreenTags.ABOUT_DRAWER}
-              activeBackgroundColor={COLORS.TEAL}
-              inactiveBackgroundColor={COLORS.GRAY_LIGHT}
-              activeTintColor={COLORS.WHITE}
-              inactiveTintColor={COLORS.BLACK}
+              activeBackgroundColor={Colors.danger100}
+              inactiveBackgroundColor={Colors.grey100}
+              activeTintColor={Colors.text}
+              inactiveTintColor={Colors.text}
             />
           </DrawerContentScrollView>
         );
@@ -85,7 +86,7 @@ const TabContainer = (): React.ReactElement => {
         // @ts-ignore
         showLabel: true,
         headerShown: false,
-        tabBarStyle: {backgroundColor: colors.background},
+        tabBarStyle: {backgroundColor: Colors.background},
       }}>
       <Tab.Screen
         name={NavScreenTags.HOME_TAB}
@@ -96,21 +97,21 @@ const TabContainer = (): React.ReactElement => {
             <Image
               source={IMAGES.HOME}
               style={{
-                height: 25,
-                width: 25,
+                height: scaleSize(40),
+                width: scaleSize(40),
                 objectFit: 'contain',
                 tintColor: focused
                   ? //@ts-ignore
-                    colors.tabbarActiveColor
+                    Colors.danger100
                   : //@ts-ignore
-                    colors.tabbarInActiveColor,
+                    Colors.grey200,
               }}
             />
           ),
           //@ts-ignore
-          tabBarActiveTintColor: colors.tabbarActiveColor,
+          tabBarActiveTintColor: Colors.black100,
           //@ts-ignore
-          tabBarInactiveTintColor: colors.tabbarInActiveColor,
+          tabBarInactiveTintColor: Colors.grey200,
         }}
       />
 
@@ -128,16 +129,16 @@ const TabContainer = (): React.ReactElement => {
                 objectFit: 'contain',
                 tintColor: focused
                   ? //@ts-ignore
-                    colors.tabbarActiveColor
+                    Colors.danger100
                   : //@ts-ignore
-                    colors.tabbarInActiveColor,
+                    Colors.grey200,
               }}
             />
           ),
           //@ts-ignore
-          tabBarActiveTintColor: colors.tabbarActiveColor,
+          tabBarActiveTintColor: Colors.black100,
           //@ts-ignore
-          tabBarInactiveTintColor: colors.tabbarInActiveColor,
+          tabBarInactiveTintColor: Colors.grey200,
         }}
       />
 
@@ -155,16 +156,16 @@ const TabContainer = (): React.ReactElement => {
                 objectFit: 'contain',
                 tintColor: focused
                   ? //@ts-ignore
-                    colors.tabbarActiveColor
+                    Colors.danger100
                   : //@ts-ignore
-                    colors.tabbarInActiveColor,
+                    Colors.grey200,
               }}
             />
           ),
           //@ts-ignore
-          tabBarActiveTintColor: colors.tabbarActiveColor,
+          tabBarActiveTintColor: Colors.black100,
           //@ts-ignore
-          tabBarInactiveTintColor: colors.tabbarInActiveColor,
+          tabBarInactiveTintColor: Colors.grey200,
         }}
       />
 
@@ -183,16 +184,16 @@ const TabContainer = (): React.ReactElement => {
                 objectFit: 'contain',
                 tintColor: focused
                   ? //@ts-ignore
-                    colors.tabbarActiveColor
+                    Colors.danger100
                   : //@ts-ignore
-                    colors.tabbarInActiveColor,
+                    Colors.grey200,
               }}
             />
           ),
           //@ts-ignore
-          tabBarActiveTintColor: colors.tabbarActiveColor,
+          tabBarActiveTintColor: Colors.black100,
           //@ts-ignore
-          tabBarInactiveTintColor: colors.tabbarInActiveColor,
+          tabBarInactiveTintColor: Colors.grey200,
         }}
       />
     </Tab.Navigator>

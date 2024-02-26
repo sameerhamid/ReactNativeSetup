@@ -6,12 +6,12 @@ import IntroScreen from '../../screens/introScreen';
 import LoginScreen from '../../screens/auth/LoginScreen';
 import {NavScreenTags} from '../constants/navScreenTags';
 import {navigationRef} from '../utils/navigatorUtils';
-import {AppContext} from '../theme/AppContext';
-import DarkTheme from '../theme/darkTheme';
-
+import {AppContext} from '../themes/AppContext';
+import {DarkTheme} from '../themes/darkTheme';
+import {LightTheme} from '../themes/lightTheme';
 import SignupScreen from '../../screens/auth/signupScreen';
 import TabContainer from './tabContainer';
-import LightTheme from '../theme/lightTheme';
+
 const Stack = createStackNavigator();
 const AuthStack = (): React.ReactElement => (
   <Stack.Navigator>

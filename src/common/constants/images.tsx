@@ -11,4 +11,6 @@ export const IMAGES = {
   ORDER: require('../assets/images/orders.png'),
   WISHLIST: require('../assets/images/wishlist.png'),
   HOME: require('../assets/images/home.png'),
+  BACK: require('../assets/images/back.png'),
+  FORWARD: require('../assets/images/forward.png'),
 };

@@ -1,17 +1,20 @@
 import React from 'react';
 import {Text} from 'react-native';
 import {SafeAreaView} from 'react-native';
-import {COLORS} from '../../../common/constants/colors';
+
 import {FONTS} from '../../../common/constants/fonts';
-import {TextInput} from 'react-native';
+
 import {TouchableWithoutFeedback} from 'react-native';
 import {View} from 'react-native';
 
-import {Alert} from 'react-native';
 import {goBack} from '../../../common/utils/navigatorUtils';
 import CustomForm from '../../../common/components/customForm';
+import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
+import Colors from '../../../common/styles/colors';
+import {useTheme} from '@react-navigation/native';
 
 const SignupScreen = () => {
+  const {colors} = useTheme();
   const formData = [
     {
       id: 1,
@@ -70,13 +73,14 @@ const SignupScreen = () => {
     },
   ];
   const renderText = () => (
-    <View>
+    <View style={{marginBottom: scaleSize(30)}}>
       <Text
         style={{
-          marginTop: 60,
+          marginTop: scaleSize(60),
           textAlign: 'center',
           fontFamily: FONTS.MONTSERRAT_BOLD,
-          fontSize: 24,
+          fontSize: scaleFontSize(28),
+          color: colors.text,
         }}>
         Hello!
       </Text>
@@ -84,16 +88,20 @@ const SignupScreen = () => {
         style={{
           textAlign: 'center',
           fontFamily: FONTS.MONTSERRAT,
-          fontSize: 20,
-          marginTop: 20,
-          marginHorizontal: 30,
+          fontSize: scaleFontSize(22),
+          marginTop: scaleSize(22),
+          marginHorizontal: scaleSize(30),
+          color: colors.text,
         }}>
         Welcome to the simplified version of React Native
       </Text>
     </View>
   );
 
-  const renderForm = () => <CustomForm formFieldsData={formData} />;
+  const renderForm = () => (
+    //@ts-ignore
+    <CustomForm formFieldsData={formData} />
+  );
   return (
     <SafeAreaView style={{marginHorizontal: 30}}>
       {renderText()}
@@ -101,13 +109,15 @@ const SignupScreen = () => {
       {renderForm()}
       <View
         style={{flexDirection: 'row', justifyContent: 'center', marginTop: 50}}>
-        <Text style={{fontFamily: FONTS.MONTSERRAT}}>Already a member?</Text>
+        <Text style={{fontFamily: FONTS.MONTSERRAT, color: colors.text}}>
+          Already a member?
+        </Text>
         <TouchableWithoutFeedback onPress={() => goBack()}>
           <Text
             style={{
               marginStart: 5,
               fontFamily: FONTS.MONTSERRAT_BOLD,
-              color: 'teal',
+              color: Colors.danger100,
             }}>
             Sign In
           </Text>

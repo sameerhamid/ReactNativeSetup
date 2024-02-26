@@ -10,12 +10,13 @@ import {
 } from 'react-native';
 import React, {useContext} from 'react';
 import {FONTS} from '../../../common/constants/fonts';
-import {COLORS} from '../../../common/constants/colors';
+
 import {IMAGES} from '../../../common/constants/images';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
-import {AppContext} from '../../../common/theme/AppContext';
+import {AppContext} from '../../../common/themes/AppContext';
 import {useTheme} from '@react-navigation/native';
 import {navigate} from '../../../common/utils/navigatorUtils';
+import Colors from '../../../common/styles/colors';
 
 const LoginScreen = () => {
   //@ts-ignore
@@ -75,7 +76,7 @@ const LoginScreen = () => {
     <>
       <TextInput
         style={{
-          backgroundColor: COLORS.WHITE,
+          backgroundColor: Colors.cyan,
           height: 50,
           maxHeight: 50,
           minHeight: 50,
@@ -86,13 +87,13 @@ const LoginScreen = () => {
           fontFamily: FONTS.MONTSERRAT,
         }}
         placeholder="Email"
-        placeholderTextColor={COLORS.PLACEHOLDER_COLOR}
-        cursorColor={COLORS.TEAL}
-        selectionColor={COLORS.TEAL}
+        placeholderTextColor={Colors.black100}
+        cursorColor={Colors.danger100}
+        selectionColor={Colors.danger100}
       />
       <TextInput
         style={{
-          backgroundColor: COLORS.WHITE,
+          backgroundColor: Colors.cyan,
           height: 50,
           maxHeight: 50,
           minHeight: 50,
@@ -103,14 +104,12 @@ const LoginScreen = () => {
           fontFamily: FONTS.MONTSERRAT,
         }}
         placeholder="Password"
-        placeholderTextColor={COLORS.PLACEHOLDER_COLOR}
-        cursorColor={COLORS.TEAL}
-        selectionColor={COLORS.TEAL}
+        placeholderTextColor={Colors.black100}
+        cursorColor={Colors.danger100}
+        selectionColor={Colors.danger100}
       />
     </>
   );
-
-  console.log(socialMedia);
 
   const renderSocials = (): React.ReactElement => (
     <View
@@ -128,7 +127,7 @@ const LoginScreen = () => {
               width: 70,
               borderWidth: 3,
               borderRadius: 10,
-              borderColor: isDarkTheme ? COLORS.WHITE : COLORS.BLACK,
+              borderColor: isDarkTheme ? Colors.danger100 : Colors.black100,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
@@ -169,7 +168,7 @@ const LoginScreen = () => {
         <View
           style={{
             height: 50,
-            backgroundColor: COLORS.TEAL,
+            backgroundColor: Colors.danger100,
             marginTop: 20,
             borderRadius: 10,
             justifyContent: 'center',
@@ -178,7 +177,7 @@ const LoginScreen = () => {
           <Text
             style={{
               fontFamily: FONTS.MONTSERRAT_BOLD,
-              color: COLORS.WHITE,
+              color: Colors.text,
               fontSize: 16,
             }}>
             Sign In
@@ -192,7 +191,7 @@ const LoginScreen = () => {
           alignItems: 'center',
         }}>
         <View
-          style={{flex: 0.5, height: 2, backgroundColor: COLORS.GRAY_LIGHT}}
+          style={{flex: 0.5, height: 2, backgroundColor: Colors.danger100}}
         />
         <Text
           style={{
@@ -204,7 +203,7 @@ const LoginScreen = () => {
           Or continue with
         </Text>
         <View
-          style={{flex: 0.5, height: 2, backgroundColor: COLORS.GRAY_LIGHT}}
+          style={{flex: 0.5, height: 2, backgroundColor: Colors.danger100}}
         />
       </View>
       {renderSocials()}
@@ -218,7 +217,7 @@ const LoginScreen = () => {
             style={{
               marginStart: 5,
               fontFamily: FONTS.MONTSERRAT_BOLD,
-              color: 'teal',
+              color: Colors.danger100,
             }}>
             Register now
           </Text>
