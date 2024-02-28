@@ -40,6 +40,7 @@ import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
 import {showConsoler} from '../../config/logUtils';
 import {showToast} from '../../utils/alertUtils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const createUserWithEmailAndPasswordCustom = async (
   email: string,
@@ -51,6 +52,8 @@ const createUserWithEmailAndPasswordCustom = async (
       password,
     );
     showToast('User account created & signed in!');
+    const userToke = userCredential.user.getIdToken();
+    await AsyncStorage.setItem('userToken', JSON.stringify(userToke));
     return userCredential.user!;
   } catch (error) {
     //@ts-ignore\
