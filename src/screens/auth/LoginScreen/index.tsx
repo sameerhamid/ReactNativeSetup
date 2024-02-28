@@ -7,8 +7,9 @@ import {
   Image,
   Switch,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {FONTS} from '../../../common/constants/fonts';
 
 import {IMAGES} from '../../../common/constants/images';
@@ -18,10 +19,14 @@ import {useTheme} from '@react-navigation/native';
 import {navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import PageSkelton from '../../../common/components/pageSkelton';
+import {createUserWithEmailAndPasswordCustom} from '../../../common/auth/emailAndPasswordAuth';
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
 const LoginScreen = () => {
   //@ts-ignore
   const {isDarkTheme, setIsDarkTheme} = useContext(AppContext);
+  const [email, setEmail] = useState('');
+  const [passsword, setPassword] = useState('');
 
   const socialMedia = [
     {id: 0, image: IMAGES.APPLE},
@@ -91,6 +96,7 @@ const LoginScreen = () => {
         placeholderTextColor={Colors.black100}
         cursorColor={Colors.danger100}
         selectionColor={Colors.danger100}
+        onChangeText={txt => setEmail(txt)}
       />
       <TextInput
         style={{
@@ -108,6 +114,7 @@ const LoginScreen = () => {
         placeholderTextColor={Colors.black100}
         cursorColor={Colors.danger100}
         selectionColor={Colors.danger100}
+        onChangeText={text => setPassword(text)}
       />
     </>
   );
@@ -146,6 +153,29 @@ const LoginScreen = () => {
     </View>
   );
 
+  const registerUser = async (email: string, passsword: string) => {
+    // authWithEamilAndPass(email, passsword)
+    //   .then(() => {
+    //     navigate(NavScreenTags.BOTTOM_TAB_NAV);
+    //   })
+    //   .catch(() => {
+    //     Alert.alert('something went wrong while registering the user');
+    //   });
+
+    // Example usage
+    try {
+      const user: FirebaseAuthTypes.User =
+        await createUserWithEmailAndPasswordCustom(email, passsword);
+      // Do something with the user object if needed
+      if (user !== undefined || user !== null) {
+        navigate(NavScreenTags.BOTTOM_TAB_NAV);
+      }
+    } catch (error) {
+      // Handle errors here
+      console.error('Error creating user:', error);
+    }
+  };
+
   return (
     <PageSkelton isSafeAreaView isPaddingFromBottom>
       {renderSwitch()}
@@ -162,10 +192,7 @@ const LoginScreen = () => {
         }}>
         Forgot Password?
       </Text>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          navigate(NavScreenTags.BOTTOM_TAB_NAV);
-        }}>
+      <TouchableOpacity onPress={() => registerUser(email, passsword)}>
         <View
           style={{
             height: 50,
@@ -184,7 +211,7 @@ const LoginScreen = () => {
             Sign In
           </Text>
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
       <View
         style={{
           marginTop: 50,
