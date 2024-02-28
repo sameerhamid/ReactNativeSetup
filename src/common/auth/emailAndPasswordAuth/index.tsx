@@ -71,3 +71,35 @@ const createUserWithEmailAndPasswordCustom = async (
 };
 
 export {createUserWithEmailAndPasswordCustom};
+
+const signInWithEmailAndPassCustom = async (
+  email: string,
+  password: string,
+) => {
+  try {
+    const userCredentials = await auth().signInWithEmailAndPassword(
+      email,
+      password,
+    );
+
+    const user = userCredentials.user;
+    const userToken = userCredentials.user.getIdToken();
+    await AsyncStorage.setItem('userToken', JSON.stringify(userToken));
+    showToast('login successful');
+    return user;
+  } catch (error) {
+    //@ts-ignore
+    if (
+      //@ts-ignore
+      error.code === 'auth/user-not-found' ||
+      //@ts-ignore
+      error.code === 'auth/wrong-password'
+    ) {
+      Alert.alert('Invalid email or password. Please try again.');
+    } else {
+      console.error(error);
+    }
+  }
+};
+
+export {signInWithEmailAndPassCustom};

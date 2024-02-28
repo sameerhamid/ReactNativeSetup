@@ -3,14 +3,14 @@ import 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 
 import AppNavigation from './src/common/routes/appNavigation';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {navigate} from './src/common/utils/navigatorUtils';
 import {NavScreenTags} from './src/common/constants/navScreenTags';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 function App(): React.JSX.Element {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
-
   useEffect(() => {
     const checkUserToken = async () => {
       const userToken = await AsyncStorage.getItem('userToken');
@@ -25,7 +25,6 @@ function App(): React.JSX.Element {
 
     checkUserToken();
   });
-
   return <AppNavigation />;
 }
 
