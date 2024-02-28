@@ -19,7 +19,10 @@ import {useTheme} from '@react-navigation/native';
 import {navigate} from '../../../common/utils/navigatorUtils';
 import Colors from '../../../common/styles/colors';
 import PageSkelton from '../../../common/components/pageSkelton';
-import {createUserWithEmailAndPasswordCustom} from '../../../common/auth/emailAndPasswordAuth';
+import {
+  createUserWithEmailAndPasswordCustom,
+  signInWithEmailAndPassCustom,
+} from '../../../common/auth/emailAndPasswordAuth';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
 const LoginScreen = () => {
@@ -153,29 +156,18 @@ const LoginScreen = () => {
     </View>
   );
 
-  const registerUser = async (email: string, passsword: string) => {
-    // authWithEamilAndPass(email, passsword)
-    //   .then(() => {
-    //     navigate(NavScreenTags.BOTTOM_TAB_NAV);
-    //   })
-    //   .catch(() => {
-    //     Alert.alert('something went wrong while registering the user');
-    //   });
-
-    // Example usage
+  const login = async (email: string, password: string) => {
     try {
-      const user: FirebaseAuthTypes.User =
-        await createUserWithEmailAndPasswordCustom(email, passsword);
-      // Do something with the user object if needed
-      if (user !== undefined || user !== null) {
+      const user = await signInWithEmailAndPassCustom(email, password);
+      console.log(user);
+
+      if (user != undefined || user != null) {
         navigate(NavScreenTags.BOTTOM_TAB_NAV);
       }
     } catch (error) {
-      // Handle errors here
-      console.error('Error creating user:', error);
+      console.log(error);
     }
   };
-
   return (
     <PageSkelton isSafeAreaView isPaddingFromBottom>
       {renderSwitch()}
@@ -192,7 +184,7 @@ const LoginScreen = () => {
         }}>
         Forgot Password?
       </Text>
-      <TouchableOpacity onPress={() => registerUser(email, passsword)}>
+      <TouchableOpacity onPress={() => login(email, passsword)}>
         <View
           style={{
             height: 50,

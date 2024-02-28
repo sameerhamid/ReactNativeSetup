@@ -1,5 +1,5 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React, {useState} from 'react';
+import {Alert, Text, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native';
 
 import {FONTS} from '../../../common/constants/fonts';
@@ -7,15 +7,22 @@ import {FONTS} from '../../../common/constants/fonts';
 import {TouchableWithoutFeedback} from 'react-native';
 import {View} from 'react-native';
 
-import {goBack} from '../../../common/utils/navigatorUtils';
+import {goBack, navigate} from '../../../common/utils/navigatorUtils';
 import CustomForm from '../../../common/components/customForm';
 import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
 import Colors from '../../../common/styles/colors';
 import {useTheme} from '@react-navigation/native';
 import PageSkelton from '../../../common/components/pageSkelton';
+import {TextInput} from 'react-native-gesture-handler';
+import {createUserWithEmailAndPasswordCustom} from '../../../common/auth/emailAndPasswordAuth';
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {NavScreenTags} from '../../../common/constants/navScreenTags';
 
 const SignupScreen = () => {
   const {colors} = useTheme();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPasswor, setConfirmPassword] = useState('');
   const formData = [
     {
       id: 1,
@@ -73,6 +80,29 @@ const SignupScreen = () => {
       selectionColor: '',
     },
   ];
+
+  const registerUser = async (
+    email: string,
+    passsword: string,
+    confirmPass: string,
+  ) => {
+    if (passsword === confirmPass) {
+      try {
+        const user: FirebaseAuthTypes.User =
+          await createUserWithEmailAndPasswordCustom(email, passsword);
+        // Do something with the user object if needed
+        if (user !== undefined || user !== null) {
+          navigate(NavScreenTags.BOTTOM_TAB_NAV);
+        }
+      } catch (error) {
+        // Handle errors here
+        console.error('Error creating user:', error);
+      }
+    } else {
+      Alert.alert("Passord doesn't match");
+    }
+  };
+
   const renderText = () => (
     <View style={{marginBottom: scaleSize(30)}}>
       <Text
@@ -101,13 +131,89 @@ const SignupScreen = () => {
 
   const renderForm = () => (
     //@ts-ignore
-    <CustomForm formFieldsData={formData} />
+    <>
+      <TextInput
+        style={{
+          backgroundColor: Colors.cyan,
+          height: 50,
+          maxHeight: 50,
+          minHeight: 50,
+          fontSize: 16,
+          borderRadius: 10,
+          paddingHorizontal: 20,
+          marginTop: 50,
+          fontFamily: FONTS.MONTSERRAT,
+        }}
+        placeholder="Email"
+        placeholderTextColor={Colors.black100}
+        cursorColor={Colors.danger100}
+        selectionColor={Colors.danger100}
+        onChangeText={txt => setEmail(txt)}
+      />
+      <TextInput
+        style={{
+          backgroundColor: Colors.cyan,
+          height: 50,
+          maxHeight: 50,
+          minHeight: 50,
+          fontSize: 16,
+          borderRadius: 10,
+          paddingHorizontal: 20,
+          marginTop: 20,
+          fontFamily: FONTS.MONTSERRAT,
+        }}
+        placeholder="Password"
+        placeholderTextColor={Colors.black100}
+        cursorColor={Colors.danger100}
+        selectionColor={Colors.danger100}
+        onChangeText={text => setPassword(text)}
+      />
+      <TextInput
+        style={{
+          backgroundColor: Colors.cyan,
+          height: 50,
+          maxHeight: 50,
+          minHeight: 50,
+          fontSize: 16,
+          borderRadius: 10,
+          paddingHorizontal: 20,
+          marginTop: 20,
+          fontFamily: FONTS.MONTSERRAT,
+        }}
+        placeholder="Password"
+        placeholderTextColor={Colors.black100}
+        cursorColor={Colors.danger100}
+        selectionColor={Colors.danger100}
+        onChangeText={text => setConfirmPassword(text)}
+      />
+    </>
   );
   return (
     <PageSkelton isSafeAreaView isPaddingFromBottom>
       {renderText()}
 
       {renderForm()}
+      <TouchableOpacity
+        onPress={() => registerUser(email, password, confirmPasswor)}>
+        <View
+          style={{
+            height: 50,
+            backgroundColor: Colors.danger100,
+            marginTop: 20,
+            borderRadius: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text
+            style={{
+              fontFamily: FONTS.MONTSERRAT_BOLD,
+              color: Colors.text,
+              fontSize: 16,
+            }}>
+            Sign Up
+          </Text>
+        </View>
+      </TouchableOpacity>
       <View
         style={{flexDirection: 'row', justifyContent: 'center', marginTop: 50}}>
         <Text style={{fontFamily: FONTS.MONTSERRAT, color: colors.text}}>

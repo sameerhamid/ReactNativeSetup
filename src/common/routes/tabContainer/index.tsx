@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import LoginScreen from '../../../screens/auth/LoginScreen';
 import {NavScreenTags} from '../../constants/navScreenTags';
 
-import {Image, Text, View} from 'react-native';
+import {Dimensions, Image, Text, TouchableOpacity, View} from 'react-native';
 import {IMAGES} from '../../constants/images';
 
 import {useTheme} from '@react-navigation/native';
@@ -15,10 +15,12 @@ import {
   DrawerItem,
   createDrawerNavigator,
 } from '@react-navigation/drawer';
-import {navigate} from '../../utils/navigatorUtils';
+import {navigate, navigateToAnotherStack} from '../../utils/navigatorUtils';
 import AboutScreen from '../../../screens/Home/AboutScreen';
 import Colors from '../../styles/colors';
 import {scaleSize} from '../../utils/scaleSheetUtils';
+import {signOutCustom} from '../../auth/emailAndPasswordAuth/signout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -26,6 +28,21 @@ const Drawer = createDrawerNavigator();
 // Drawer navigation
 
 const DrawerContainer = () => {
+  // sign out method
+  const signOut = async () => {
+    try {
+      await signOutCustom();
+      // Continue with any post-sign-out logic if needed
+      navigateToAnotherStack(
+        NavScreenTags.AUTH_STACK,
+        NavScreenTags.LOGIN_SCREEN,
+      );
+      await AsyncStorage.removeItem('userToken');
+    } catch (error) {
+      // Handle errors here
+      console.error('Error during sign-out:', error);
+    }
+  };
   const {colors} = useTheme();
   return (
     <Drawer.Navigator
@@ -38,28 +55,53 @@ const DrawerContainer = () => {
           <DrawerContentScrollView
             {...props}
             //@ts-ignore
-            style={{backgroundColor: colors.background, paddingTop: 22}}>
+            style={{
+              backgroundColor: colors.background,
+              paddingTop: 22,
+            }}>
             <Text style={{textAlign: 'center'}}>Code with sam</Text>
 
-            <DrawerItem
-              label={'Profile'}
-              onPress={() => navigate(NavScreenTags.PROFILE_TAB)}
-              focused={focused === NavScreenTags.PROFILE_TAB}
-              activeBackgroundColor={Colors.danger100}
-              inactiveBackgroundColor={Colors.grey100}
-              activeTintColor={Colors.text}
-              inactiveTintColor={Colors.text}
-            />
+            <View
+              style={{
+                justifyContent: 'space-between',
+                height: Dimensions.get('screen').height - scaleSize(200),
+              }}>
+              <View>
+                <DrawerItem
+                  label={'Profile'}
+                  onPress={() => navigate(NavScreenTags.PROFILE_TAB)}
+                  focused={focused === NavScreenTags.PROFILE_TAB}
+                  activeBackgroundColor={Colors.danger100}
+                  inactiveBackgroundColor={Colors.grey100}
+                  activeTintColor={Colors.text}
+                  inactiveTintColor={Colors.text}
+                />
 
-            <DrawerItem
-              label={'About Us'}
-              onPress={() => navigate(NavScreenTags.ABOUT_DRAWER)}
-              focused={focused === NavScreenTags.ABOUT_DRAWER}
-              activeBackgroundColor={Colors.danger100}
-              inactiveBackgroundColor={Colors.grey100}
-              activeTintColor={Colors.text}
-              inactiveTintColor={Colors.text}
-            />
+                <DrawerItem
+                  label={'About Us'}
+                  onPress={() => navigate(NavScreenTags.ABOUT_DRAWER)}
+                  focused={focused === NavScreenTags.ABOUT_DRAWER}
+                  activeBackgroundColor={Colors.danger100}
+                  inactiveBackgroundColor={Colors.grey100}
+                  activeTintColor={Colors.text}
+                  inactiveTintColor={Colors.text}
+                />
+              </View>
+              <TouchableOpacity
+                onPress={() => signOut()}
+                style={{
+                  marginHorizontal: scaleSize(20),
+                  backgroundColor: Colors.danger100,
+                  paddingVertical: scaleSize(10),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: scaleSize(8),
+                }}>
+                <Text style={{color: Colors.white100, fontSize: 18}}>
+                  Logout
+                </Text>
+              </TouchableOpacity>
+            </View>
           </DrawerContentScrollView>
         );
       }}>
