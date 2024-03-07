@@ -47,11 +47,7 @@ const HomeScreen = () => {
 
   return (
     <PageSkelton isSafeAreaView>
-      <CustomHeader
-        leftAccessories={IMAGES.BACK}
-        titlle="Home"
-        leftAccessoriesPress={goBack}
-      />
+      <CustomHeader titlle="Home" />
     </PageSkelton>
   );
 };

@@ -38,7 +38,7 @@
 
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
-import {showConsoler} from '../../config/logUtils';
+import {showConsoler} from '../../constants/logUtils';
 import {showToast} from '../../utils/alertUtils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
