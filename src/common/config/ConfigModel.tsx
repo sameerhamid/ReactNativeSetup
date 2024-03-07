@@ -1,15 +1,8 @@
-export class ConfigModel {
-  graphqlUrl: string = '';
-  restApiStagingUrl: string = '';
-
-  stagingUrl: string = '';
-  constructor(
-    graphqlUrl: string,
-    restApiStagingUrl: string,
-    stagingUrl: string,
-  ) {
-    this.graphqlUrl = graphqlUrl;
-    this.restApiStagingUrl = restApiStagingUrl;
-    this.stagingUrl = stagingUrl;
+export class ConfingModel {
+  postsStaginUrl: string = '';
+  postsAppUrl: string = '';
+  constructor(postsStaginUrl: string, postsAppUrl: string) {
+    this.postsAppUrl = postsAppUrl;
+    this.postsStaginUrl = postsStaginUrl;
   }
 }

@@ -1,5 +1,5 @@
 import Config from 'react-native-config';
-import {ConfigModel} from './ConfigModel';
+import {ConfingModel} from './ConfigModel';
 
 export enum ENVIRONMENT {
   STAGING = 1,
@@ -7,38 +7,22 @@ export enum ENVIRONMENT {
 }
 
 export class SecretManager {
-  static configModel: ConfigModel;
+  static configModle: ConfingModel;
   static SELECTED_ENVIRONMENT = ENVIRONMENT.STAGING;
 
   static init(): void {
     switch (SecretManager.SELECTED_ENVIRONMENT) {
       case ENVIRONMENT.STAGING:
-        console.log('staging');
-
-        SecretManager.configModel = new ConfigModel(
-          Config.STAGING_GRAPH_URL!,
-          Config.REST_API_BASE_URL!,
-          Config.LOCAL_GRAPH_URL!,
+        SecretManager.configModle = new ConfingModel(
+          Config.POSTS_URL_STAGING!,
+          Config.POSTS_URL_APP!,
         );
         break;
       case ENVIRONMENT.PRODUCTION:
-        console.log('production');
-        SecretManager.configModel = new ConfigModel(
-          Config.STAGING_GRAPH_URL!,
-          Config.REST_API_BASE_URL!,
-          Config.LOCAL_GRAPH_URL!,
+        SecretManager.configModle = new ConfingModel(
+          Config.POSTS_URL_STAGING!,
+          Config.POSTS_URL_APP!,
         );
-        break;
-      default:
-        SecretManager.configModel = new ConfigModel(
-          Config.STAGING_GRAPH_URL!,
-          Config.REST_API_BASE_URL!,
-          Config.LOCAL_GRAPH_URL!,
-        );
-        console.log(
-          `staging creds >>> ${JSON.stringify(SecretManager.configModel)}`,
-        );
-        break;
     }
   }
 }
