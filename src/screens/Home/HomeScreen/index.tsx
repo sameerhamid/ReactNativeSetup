@@ -9,7 +9,6 @@ import {
   navigateToAnotherStack,
 } from '../../../common/utils/navigatorUtils';
 import {Text, TouchableOpacity, View} from 'react-native';
-import CustomText from '../../../common/components/customText';
 import Spacer from '../../../common/components/utility/spacer';
 import {scaleSize} from '../../../common/utils/scaleSheetUtils';
 import {signOutCustom} from '../../../common/auth/emailAndPasswordAuth/signout';

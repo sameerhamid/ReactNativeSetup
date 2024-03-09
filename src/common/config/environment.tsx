@@ -1,28 +1,18 @@
 import Config from 'react-native-config';
-import {ConfingModel} from './ConfigModel';
-
-export enum ENVIRONMENT {
-  STAGING = 1,
-  PRODUCTION = 2,
-}
+import {ConfigModel} from './ConfigModel';
+import {showConsoler} from '../constants/logUtils';
 
 export class SecretManager {
-  static configModle: ConfingModel;
-  static SELECTED_ENVIRONMENT = ENVIRONMENT.STAGING;
+  static configModle: ConfigModel;
 
-  static init(): void {
-    switch (SecretManager.SELECTED_ENVIRONMENT) {
-      case ENVIRONMENT.STAGING:
-        SecretManager.configModle = new ConfingModel(
-          Config.POSTS_URL_STAGING!,
-          Config.POSTS_URL_APP!,
-        );
-        break;
-      case ENVIRONMENT.PRODUCTION:
-        SecretManager.configModle = new ConfingModel(
-          Config.POSTS_URL_STAGING!,
-          Config.POSTS_URL_APP!,
-        );
-    }
+  static init() {
+    SecretManager.configModle = new ConfigModel(
+      Config.POSTS_URL!,
+      Config.BASIC_URL!,
+    );
+
+    showConsoler(
+      `url>>>>>>>>${JSON.stringify(SecretManager.configModle.basicUrl)}`,
+    );
   }
 }
