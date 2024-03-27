@@ -4,7 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 
 import AppNavigation from './src/common/routes/appNavigation';
 
-import {navigate} from './src/common/utils/navigatorUtils';
+import {navigate, navigationRef} from './src/common/utils/navigatorUtils';
 import {NavScreenTags} from './src/common/constants/navScreenTags';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ApolloProvider, useApolloClient} from '@apollo/client';
