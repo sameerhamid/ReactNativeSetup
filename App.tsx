@@ -18,7 +18,9 @@ import HomeScreen from './src/screens/Home/HomeScreen';
 function App(): React.JSX.Element {
   const [client, setClient] = useState();
   useEffect(() => {
-    SplashScreen.hide();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
   }, []);
   useEffect(() => {
     const checkUserToken = async () => {
@@ -31,7 +33,6 @@ function App(): React.JSX.Element {
         navigate(NavScreenTags.BOTTOM_TAB_NAV);
       }
     };
-
     checkUserToken();
   });
 

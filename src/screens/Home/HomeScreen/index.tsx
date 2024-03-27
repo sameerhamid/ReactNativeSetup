@@ -3,21 +3,16 @@ import {useTheme} from '@react-navigation/native';
 import CustomHeader from '../../../common/components/customHeader';
 import {IMAGES} from '../../../common/constants/images';
 import PageSkelton from '../../../common/components/pageSkelton';
-import {
-  goBack,
-  navigate,
-  navigateToAnotherStack,
-} from '../../../common/utils/navigatorUtils';
-import {Text, TouchableOpacity, View} from 'react-native';
-import Spacer from '../../../common/components/utility/spacer';
-import {scaleSize} from '../../../common/utils/scaleSheetUtils';
-import {signOutCustom} from '../../../common/auth/emailAndPasswordAuth/signout';
-import {NavScreenTags} from '../../../common/constants/navScreenTags';
+import {ApollPostsProvider} from '../../../common/apolloProvider/apolloPostsProvider';
+import {useApolloClient} from '@apollo/client';
+import getPosts from '../../../apollo/queries/getPosts';
+import {showConsoler} from '../../../common/constants/logUtils';
 
 const HomeScreen = () => {
   const {colors} = useTheme();
   const [data, setData] = useState();
   const [visible, setVisible] = useState(true);
+  const client = useApolloClient();
 
   // useEffect(() => {
   //   setVisible(true);
@@ -43,6 +38,17 @@ const HomeScreen = () => {
   // }
 
   // console.log(prayerTiming);
+
+  useEffect(() => {
+    ApollPostsProvider.apolloPostsInstance.listPosts(
+      client,
+      getPosts,
+      res => {
+        showConsoler(`response>>>>${JSON.stringify(res)}`);
+      },
+      () => {},
+    );
+  }, []);
 
   return (
     <PageSkelton isSafeAreaView>

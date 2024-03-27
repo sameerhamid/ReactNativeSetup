@@ -1,10 +1,12 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query getPosts {
-    posts {
-      title
-      body
+  query getPoset {
+    locations {
+      id
+      name
+      description
+      photo
     }
   }
 `;

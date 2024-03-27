@@ -42,3 +42,8 @@ export const navigateToAnotherStack = (
 export const goBack = (): void => {
   navigationRef?.current?.goBack();
 };
+
+export const replace = (routeName: string) => {
+  //@ts-ignore
+  navigationRef.current?.replace(routeName);
+};
