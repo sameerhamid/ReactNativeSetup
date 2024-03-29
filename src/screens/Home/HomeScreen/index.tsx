@@ -1,18 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import {useTheme} from '@react-navigation/native';
+
 import CustomHeader from '../../../common/components/customHeader';
-import {IMAGES} from '../../../common/constants/images';
+
 import PageSkelton from '../../../common/components/pageSkelton';
-import {ApollPostsProvider} from '../../../common/apolloProvider/apolloPostsProvider';
-import {useApolloClient} from '@apollo/client';
-import getPosts from '../../../apollo/queries/getPosts';
-import {showConsoler} from '../../../common/constants/logUtils';
+
+import useHomeScreenController from './homeScreenController';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {useTheme} from '@react-navigation/native';
+import stylesObj from './styles';
+import CustomText from '../../../common/components/customText';
+import Spacer from '../../../common/components/utility/spacer';
 
 const HomeScreen = () => {
-  const {colors} = useTheme();
-  const [data, setData] = useState();
-  const [visible, setVisible] = useState(true);
-  const client = useApolloClient();
+  const {
+    loaderVisible,
+    setLoaderVisible,
+    locations,
+    setLocations,
+    onCardPress,
+  } = useHomeScreenController();
+
+  const theme = useTheme();
+  const styles = stylesObj(theme?.colors);
+
+  console.log(`Locations >>>> ${JSON.stringify(locations)}`);
 
   // useEffect(() => {
   //   setVisible(true);
@@ -39,20 +50,30 @@ const HomeScreen = () => {
 
   // console.log(prayerTiming);
 
-  useEffect(() => {
-    ApollPostsProvider.apolloPostsInstance.listPosts(
-      client,
-      getPosts,
-      res => {
-        showConsoler(`response>>>>${JSON.stringify(res)}`);
-      },
-      () => {},
+  const renderLocations = ({item, index}) => {
+    return (
+      <TouchableOpacity
+        style={styles.cardsContainer}
+        onPress={() => onCardPress(item)}>
+        <View style={styles.card}>
+          <Image source={{uri: item?.photo}} style={styles.cardImage} />
+          <Text style={styles.cardText}>{item?.name}</Text>
+        </View>
+      </TouchableOpacity>
     );
-  }, []);
+  };
 
   return (
-    <PageSkelton isSafeAreaView>
+    <PageSkelton isSafeAreaView visible={loaderVisible}>
       <CustomHeader titlle="Home" />
+
+      <CustomText text={`Locations`} txtSize={22} />
+      <FlatList
+        horizontal
+        renderItem={renderLocations}
+        data={locations}
+        showsHorizontalScrollIndicator={false}
+      />
     </PageSkelton>
   );
 };
