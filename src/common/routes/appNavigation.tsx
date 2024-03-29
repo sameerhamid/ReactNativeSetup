@@ -11,6 +11,7 @@ import {DarkTheme} from '../themes/darkTheme';
 import {LightTheme} from '../themes/lightTheme';
 import SignupScreen from '../../screens/auth/signupScreen';
 import TabContainer from './tabContainer';
+import Splash from '../../screens/splash';
 
 const Stack = createStackNavigator();
 const AuthStack = (): React.ReactElement => (
@@ -30,7 +31,12 @@ const AuthStack = (): React.ReactElement => (
 
 const RooStack = (): React.ReactElement => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName={NavScreenTags.SPLASH_SCREEN}
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name={NavScreenTags.SPLASH_SCREEN} component={Splash} />
       <Stack.Screen
         name={NavScreenTags.INTRO_SCREEN}
         component={IntroScreen}

@@ -1,5 +1,4 @@
-import {View, Text} from 'react-native';
-import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {ApollPostsProvider} from '../../../common/apolloProvider/apolloPostsProvider';
 import {useApolloClient} from '@apollo/client';
 import getPosts from '../../../apollo/queries/getPosts';
@@ -15,7 +14,7 @@ interface HomeScreenControllerTypes {
 
 const useHomeScreenController = (): HomeScreenControllerTypes => {
   const client = useApolloClient();
-  const [loaderVisible, setLoaderVisible] = useState<boolean>(false);
+  const [loaderVisible, setLoaderVisible] = useState<boolean>(true);
   const [locations, setLocations] = useState<[] | undefined>([]);
 
   const getPost = () => {

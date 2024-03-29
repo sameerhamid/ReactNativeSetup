@@ -21,26 +21,6 @@ import {ApollPostsProvider} from './src/common/apolloProvider/apolloPostsProvide
 import HomeScreen from './src/screens/Home/HomeScreen';
 function App(): React.JSX.Element {
   const [client, setClient] = useState();
-  useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 1000);
-  }, []);
-  useEffect(() => {
-    const checkUserToken = async () => {
-      const userToken = await AsyncStorage.getItem('userToken');
-
-      // If a user token exists, navigate to the home screen
-      if (userToken) {
-        // Use the navigation method to go to the home screen
-        // This depends on your navigation setup (e.g., Stack.Navigator)
-        replace(NavScreenTags.BOTTOM_TAB_NAV);
-      } else {
-        replace(NavScreenTags.AUTH_STACK);
-      }
-    };
-    checkUserToken();
-  });
 
   const setupApollo = async (): Promise<void> => {
     const newClient = await ApolloClient();
