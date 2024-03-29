@@ -1,6 +1,7 @@
 import {
   NavigationContainerRefWithCurrent,
   ParamListBase,
+  StackActions,
 } from '@react-navigation/native';
 import React from 'react';
 
@@ -44,6 +45,5 @@ export const goBack = (): void => {
 };
 
 export const replace = (routeName: string) => {
-  //@ts-ignore
-  navigationRef.current?.replace(routeName);
+  navigationRef.current?.dispatch(StackActions.replace(routeName));
 };

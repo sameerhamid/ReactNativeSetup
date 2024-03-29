@@ -4,7 +4,11 @@ import SplashScreen from 'react-native-splash-screen';
 
 import AppNavigation from './src/common/routes/appNavigation';
 
-import {navigate, navigationRef} from './src/common/utils/navigatorUtils';
+import {
+  navigate,
+  navigationRef,
+  replace,
+} from './src/common/utils/navigatorUtils';
 import {NavScreenTags} from './src/common/constants/navScreenTags';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ApolloProvider, useApolloClient} from '@apollo/client';
@@ -30,7 +34,9 @@ function App(): React.JSX.Element {
       if (userToken) {
         // Use the navigation method to go to the home screen
         // This depends on your navigation setup (e.g., Stack.Navigator)
-        navigate(NavScreenTags.BOTTOM_TAB_NAV);
+        replace(NavScreenTags.BOTTOM_TAB_NAV);
+      } else {
+        replace(NavScreenTags.AUTH_STACK);
       }
     };
     checkUserToken();
