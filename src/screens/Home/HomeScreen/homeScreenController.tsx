@@ -3,10 +3,13 @@ import {ApollPostsProvider} from '../../../common/apolloProvider/apolloPostsProv
 import {useApolloClient} from '@apollo/client';
 import getPosts from '../../../apollo/queries/getPosts';
 import {showConsoler} from '../../../common/constants/logUtils';
+import {Location} from '../../../common/model/Location/locations';
+import {navigate} from '../../../common/utils/navigatorUtils';
+import {NavScreenTags} from '../../../common/constants/navScreenTags';
 
 interface HomeScreenControllerTypes {
-  locations: [] | undefined;
-  setLocations: Dispatch<SetStateAction<[] | undefined>>;
+  locations: Location | undefined;
+  setLocations: Dispatch<SetStateAction<Location | undefined>>;
   loaderVisible: boolean;
   setLoaderVisible: Dispatch<SetStateAction<boolean>>;
   onCardPress: (_item: {}) => void;
@@ -15,7 +18,7 @@ interface HomeScreenControllerTypes {
 const useHomeScreenController = (): HomeScreenControllerTypes => {
   const client = useApolloClient();
   const [loaderVisible, setLoaderVisible] = useState<boolean>(true);
-  const [locations, setLocations] = useState<[] | undefined>([]);
+  const [locations, setLocations] = useState<Location | undefined>();
 
   const getPost = () => {
     ApollPostsProvider.apolloPostsInstance.listPosts(

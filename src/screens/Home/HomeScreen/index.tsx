@@ -9,7 +9,6 @@ import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import stylesObj from './styles';
 import CustomText from '../../../common/components/customText';
-import Spacer from '../../../common/components/utility/spacer';
 
 const HomeScreen = () => {
   const {
@@ -71,6 +70,7 @@ const HomeScreen = () => {
       <FlatList
         horizontal
         renderItem={renderLocations}
+        //@ts-ignore
         data={locations}
         showsHorizontalScrollIndicator={false}
       />

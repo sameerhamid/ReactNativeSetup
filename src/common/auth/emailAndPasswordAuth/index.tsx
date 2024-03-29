@@ -15,7 +15,12 @@ const createUserWithEmailAndPasswordCustom = async (
     );
     showToast('User account created & signed in!');
     const userToke = userCredential.user.getIdToken();
+    const userData = {
+      email: userCredential?.user?.email,
+      userId: userCredential?.user?.uid,
+    };
     await AsyncStorage.setItem('userToken', JSON.stringify(userToke));
+    await AsyncStorage.setItem('userData', JSON.stringify(userData));
     return userCredential.user!;
   } catch (error) {
     //@ts-ignore\
@@ -45,8 +50,15 @@ const signInWithEmailAndPassCustom = async (
     );
 
     const user = userCredentials.user;
+
+    const userData = {
+      email: user?.email,
+      userId: user?.uid,
+    };
+    showConsoler(`userData>>> ${JSON.stringify(userData)}`);
     const userToken = userCredentials.user.getIdToken();
     await AsyncStorage.setItem('userToken', JSON.stringify(userToken));
+    await AsyncStorage.setItem('userData', JSON.stringify(userData));
     showToast('login successful');
     return user;
   } catch (error) {

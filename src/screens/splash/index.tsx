@@ -10,6 +10,7 @@ import {useTheme} from '@react-navigation/native';
 import Colors from '../../common/styles/colors';
 
 import AnimatedLottieView from 'lottie-react-native';
+import {showConsoler} from '../../common/constants/logUtils';
 
 const Splash = () => {
   const [splashState, setSplashState] = useState(false);
@@ -22,7 +23,8 @@ const Splash = () => {
 
   const checkUserToken = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
-
+    const userData = await AsyncStorage.getItem('userData');
+    showConsoler(`AsyncStorageData>>>${JSON.stringify(userData)}`);
     // If a user token exists, navigate to the home screen
     if (userToken) {
       // Use the navigation method to go to the home screen
@@ -35,7 +37,6 @@ const Splash = () => {
   return (
     <AnimatedLottieView
       style={styles.lottieVw}
-      // eslint-disable-next-line global-require
       source={require('./INFINITYAnimation.json')}
       autoPlay
       loop={false}
