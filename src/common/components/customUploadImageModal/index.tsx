@@ -27,12 +27,19 @@ interface Props {
   setVisibleState?: React.Dispatch<React.SetStateAction<boolean>>;
   cameraType?: typeof RNCamera.Constants.Type.back;
   setCameraType?: React.Dispatch<unknown>;
+  getProfileImage?: () => void;
 }
 
 const CustomImageUploadModal = (props: Props) => {
   const theme: ThemeModelItem = useTheme();
   const styles = stylesObj(theme?.colors);
-  const {visibleState, setVisibleState, cameraType, setCameraType} = props;
+  const {
+    visibleState,
+    setVisibleState,
+    cameraType,
+    setCameraType,
+    getProfileImage,
+  } = props;
 
   const PendingView = (): ReactElement => {
     return (
@@ -85,6 +92,8 @@ const CustomImageUploadModal = (props: Props) => {
         saveToGallery(data.uri);
         showConsoler('caling if block--------');
         await AsyncStorage.setItem('Profile', `${data.uri}`);
+
+        getProfileImage!();
       }
     }
   };

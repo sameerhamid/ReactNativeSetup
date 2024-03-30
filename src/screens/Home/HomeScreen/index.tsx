@@ -101,6 +101,7 @@ const HomeScreen = () => {
       setVisibleState={setIsCameraVisible}
       cameraType={cameraType}
       setCameraType={setCameraType}
+      getProfileImage={getProfileImage}
     />
   );
 
