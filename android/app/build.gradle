@@ -83,6 +83,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+         missingDimensionStrategy 'react-native-camera', 'general' // <--- insert this line
     }
     signingConfigs {
         debug {
@@ -104,6 +106,8 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
+   
 }
 
 dependencies {
@@ -112,6 +116,7 @@ dependencies {
     implementation("com.facebook.react:flipper-integration")
 
 implementation project(':react-native-config')
+implementation project(':react-native-camera')
 
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-vector-icons')

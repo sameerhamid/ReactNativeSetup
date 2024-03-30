@@ -1,14 +1,30 @@
-import React, {useEffect, useState} from 'react';
+import React, {
+  ReactComponentElement,
+  ReactElement,
+  useEffect,
+  useState,
+} from 'react';
 
 import CustomHeader from '../../../common/components/customHeader';
 
 import PageSkelton from '../../../common/components/pageSkelton';
 
 import useHomeScreenController from './homeScreenController';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import stylesObj from './styles';
 import CustomText from '../../../common/components/customText';
+import {scaleFontSize, scaleSize} from '../../../common/utils/scaleSheetUtils';
+import CustomImageUploadModal from '../../../common/components/customUploadImageModal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {IMAGES} from '../../../common/constants/images';
 
 const HomeScreen = () => {
   const {
@@ -17,8 +33,12 @@ const HomeScreen = () => {
     locations,
     setLocations,
     onCardPress,
+    isCamerVisible,
+    cameraType,
+    setIsCameraVisible,
+    setCameraType,
   } = useHomeScreenController();
-
+  const [profileImageUrl, setProfileImageUrl] = useState('');
   const theme = useTheme();
   const styles = stylesObj(theme?.colors);
 
@@ -49,6 +69,19 @@ const HomeScreen = () => {
 
   // console.log(prayerTiming);
 
+  const getProfileImage = async () => {
+    console.log(`AsyncStorgae Data>>> ${JSON.stringify(AsyncStorage)}`);
+
+    const profileImageUrl = await AsyncStorage.getItem('Profile');
+    console.log(`profile image url ${profileImageUrl}`);
+
+    setProfileImageUrl(profileImageUrl ?? '');
+  };
+
+  useEffect(() => {
+    getProfileImage();
+  }, []);
+
   const renderLocations = ({item, index}) => {
     return (
       <TouchableOpacity
@@ -62,6 +95,15 @@ const HomeScreen = () => {
     );
   };
 
+  const renderImageUploaderModal = (): ReactElement => (
+    <CustomImageUploadModal
+      visibleState={isCamerVisible}
+      setVisibleState={setIsCameraVisible}
+      cameraType={cameraType}
+      setCameraType={setCameraType}
+    />
+  );
+
   return (
     <PageSkelton isSafeAreaView visible={loaderVisible}>
       <CustomHeader titlle="Home" />
@@ -74,6 +116,25 @@ const HomeScreen = () => {
         data={locations}
         showsHorizontalScrollIndicator={false}
       />
+
+      {profileImageUrl !== '' && (
+        <Image
+          source={{
+            uri: `${profileImageUrl ?? ''}`,
+          }}
+          style={{width: scaleSize(200), height: scaleSize(200)}}
+        />
+      )}
+
+      <TouchableOpacity
+        style={styles.openCameraBtn}
+        onPress={() => {
+          setIsCameraVisible(true);
+        }}>
+        <Text style={{fontSize: scaleFontSize(22)}}>Open Camera</Text>
+      </TouchableOpacity>
+
+      {renderImageUploaderModal()}
     </PageSkelton>
   );
 };

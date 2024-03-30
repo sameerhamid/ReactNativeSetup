@@ -6,6 +6,7 @@ import {showConsoler} from '../../../common/constants/logUtils';
 import {Location} from '../../../common/model/Location/locations';
 import {navigate} from '../../../common/utils/navigatorUtils';
 import {NavScreenTags} from '../../../common/constants/navScreenTags';
+import {RNCamera} from 'react-native-camera';
 
 interface HomeScreenControllerTypes {
   locations: Location | undefined;
@@ -13,12 +14,18 @@ interface HomeScreenControllerTypes {
   loaderVisible: boolean;
   setLoaderVisible: Dispatch<SetStateAction<boolean>>;
   onCardPress: (_item: {}) => void;
+  setIsCameraVisible: Dispatch<SetStateAction<boolean>>;
+  isCamerVisible: boolean;
+  setCameraType: Dispatch<unknown>;
+  cameraType: unknown;
 }
 
 const useHomeScreenController = (): HomeScreenControllerTypes => {
   const client = useApolloClient();
   const [loaderVisible, setLoaderVisible] = useState<boolean>(true);
   const [locations, setLocations] = useState<Location | undefined>();
+  const [isCamerVisible, setIsCameraVisible] = useState<boolean>(false);
+  const [cameraType, setCameraType] = useState(RNCamera.Constants.Type.back);
 
   const getPost = () => {
     ApollPostsProvider.apolloPostsInstance.listPosts(
@@ -50,6 +57,10 @@ const useHomeScreenController = (): HomeScreenControllerTypes => {
     locations,
     setLocations,
     onCardPress,
+    isCamerVisible,
+    setIsCameraVisible,
+    cameraType,
+    setCameraType,
   };
 };
 

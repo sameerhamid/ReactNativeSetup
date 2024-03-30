@@ -7,6 +7,7 @@ type Styles = {
   card: ViewStyle;
   cardImage: ImageStyle;
   cardText: TextStyle;
+  openCameraBtn: ViewStyle;
 };
 
 const styles = (colors?: Colors): Styles =>
@@ -32,6 +33,15 @@ const styles = (colors?: Colors): Styles =>
     cardText: {
       fontSize: scaleSize(16),
       color: colors?.black100,
+    },
+    openCameraBtn: {
+      width: scaleSize(344),
+      borderRadius: scaleSize(10),
+      height: scaleSize(60),
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'teal',
+      marginBottom: scaleSize(22),
     },
   });
 
