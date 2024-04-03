@@ -20,3 +20,9 @@ export enum InputBorderType {
   RADIUS = 4,
   NONE = 5,
 }
+
+// Render Image Source Type
+export enum ImageSourceType {
+  URL = 'Url',
+  LOCAL = 'Local',
+}
