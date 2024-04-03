@@ -83,6 +83,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+         missingDimensionStrategy 'react-native-camera', 'general' // <--- insert this line
     }
     signingConfigs {
         debug {
@@ -104,12 +106,17 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
+   
 }
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation("com.facebook.react:flipper-integration")
+
+implementation project(':react-native-config')
+implementation project(':react-native-camera')
 
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-vector-icons')
@@ -122,3 +129,6 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"

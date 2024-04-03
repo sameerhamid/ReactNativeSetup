@@ -1,41 +1,3 @@
-// import auth from '@react-native-firebase/auth';
-// import {navigate} from '../../utils/navigatorUtils';
-// import {NavScreenTags} from '../../constants/navScreenTags';
-// import {Alert} from 'react-native';
-// import {showToast} from '../../utils/alertUtils';
-
-// const authWithEamilAndPass = async (email: string, password: string) => {
-//   let message = '';
-//   if (email === '' || email === undefined) {
-//     message = 'Please enter valid email';
-//   }
-
-//   if (password === '' || password === undefined) {
-//     message = 'Please Enter Valid password';
-//   }
-
-//   await auth()
-//     .createUserWithEmailAndPassword(email, password)
-//     .then(() => {
-//       showToast('User account created & signed in!');
-//     })
-//     .catch(error => {
-//       if (error.code === 'auth/email-already-in-use') {
-//         console.log('');
-
-//         Alert.alert('That email address is already in use!');
-//       }
-
-//       if (error.code === 'auth/invalid-email') {
-//         Alert.alert('That email address is invalid!');
-//       }
-
-//       console.error(error);
-//     });
-// };
-
-// export default authWithEamilAndPass;
-
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
 import {showConsoler} from '../../constants/logUtils';
@@ -53,7 +15,12 @@ const createUserWithEmailAndPasswordCustom = async (
     );
     showToast('User account created & signed in!');
     const userToke = userCredential.user.getIdToken();
+    const userData = {
+      email: userCredential?.user?.email,
+      userId: userCredential?.user?.uid,
+    };
     await AsyncStorage.setItem('userToken', JSON.stringify(userToke));
+    await AsyncStorage.setItem('userData', JSON.stringify(userData));
     return userCredential.user!;
   } catch (error) {
     //@ts-ignore\
@@ -83,8 +50,15 @@ const signInWithEmailAndPassCustom = async (
     );
 
     const user = userCredentials.user;
+
+    const userData = {
+      email: user?.email,
+      userId: user?.uid,
+    };
+    showConsoler(`userData>>> ${JSON.stringify(userData)}`);
     const userToken = userCredentials.user.getIdToken();
     await AsyncStorage.setItem('userToken', JSON.stringify(userToken));
+    await AsyncStorage.setItem('userData', JSON.stringify(userData));
     showToast('login successful');
     return user;
   } catch (error) {

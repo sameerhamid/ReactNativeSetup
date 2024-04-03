@@ -7,6 +7,8 @@ export const NavScreenTags = {
   PROFILE_TAB: 'Profile',
   // Intro Scree
   INTRO_SCREEN: 'IntroScreen',
+  // Splash Screen
+  SPLASH_SCREEN: 'SplashScreen',
 
   // Auth Screens
 

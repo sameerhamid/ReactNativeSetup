@@ -13,4 +13,8 @@ export const IMAGES = {
   HOME: require('../assets/images/home.png'),
   BACK: require('../assets/images/back.png'),
   FORWARD: require('../assets/images/forward.png'),
+  CLOSE: require('../assets/images/close.png'),
+  PHOT0_GALLERY: require('../assets/images/photoGallery.png'),
+  CAMERA_ICON: require('../assets/images/cameraIcon.png'),
+  CHANGE_VIEW: require('../assets/images/changeView.png'),
 };
