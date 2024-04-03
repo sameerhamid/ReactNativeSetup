@@ -5,6 +5,7 @@ import {
   TextStyle,
   ViewStyle,
   KeyboardTypeOptions,
+  FlatList,
 } from 'react-native';
 import React, {ReactElement} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -20,6 +21,7 @@ import {ParamListBase, useTheme} from '@react-navigation/native';
 import {ThemeModelItem} from '../../model/theme/themeModel';
 import textStyles from '../customText/styles';
 import stylesObj from './styles';
+import {scaleSize} from '../../utils/scaleSheetUtils';
 
 // Define your form data type (FieldValues)
 type FormData = {};
@@ -139,9 +141,45 @@ const CustomInputForm = (props: typeof defaultProps): ReactElement => {
   const fieldValues = getValues();
 
   return (
-    <View>
-      <Text>CustomInputForm</Text>
-    </View>
+    <>
+      <View
+        style={{
+          marginHorizontal: !usePageSkelton ? scaleSize(25) : scaleSize(0),
+          flex: ViewFlex ?? defaultProps.ViewFlex,
+          justifyContent: 'space-between',
+        }}>
+        <View style={[props?.inputListContainerStyle || {}]}>
+          <FlatList
+            bounces={false}
+            windowSize={5}
+            scrollEnabled={false}
+            showsVerticalScrollIndicator={false}
+            // initialNumToRender={4}
+            // maxToRenderPerBatch={5}
+            updateCellsBatchingPeriod={10}
+            data={data}
+            //@ts-ignore
+            keyExtractor={({item}: {item: CustomInputModelItem}) =>
+              //@ts-ignore
+              item?.name
+            }
+            renderItem={({item}: {item: CustomInputModelItem}) => (
+              <View>
+                <Text>Input item</Text>
+              </View>
+            )}
+          />
+        </View>
+
+        {hasHeader && hasRightSubmitButton ? undefined : (
+          <View>
+            {showSubmitBtn ? (
+              <View style={[styles.bottomBtn, props?.bottomBtnStyle]}></View>
+            ) : undefined}
+          </View>
+        )}
+      </View>
+    </>
   );
 };
 
